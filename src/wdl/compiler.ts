@@ -121,6 +121,22 @@ const serializable = (value: unknown): unknown => {
     );
   return undefined;
 };
+// Provenance is a readable input preview, not another copy of every geometry
+// buffer and world plan at every descendant. Complete data stays in the IR.
+const parameterPreview = (props: Record<string, unknown>): Record<string, unknown> => {
+  const values = serializable(props) as Record<string, unknown>;
+  const preview = (value: unknown): unknown => {
+    const encoded = JSON.stringify(value);
+    if (!encoded || encoded.length <= 1024) return value;
+    if (Array.isArray(value)) return { $summary: "array", length: value.length, preview: value.slice(0, 3).map(preview) };
+    if (typeof value === "object" && value !== null) {
+      const entries = Object.entries(value);
+      return { $summary: "object", keys: entries.map(([key]) => key), ...Object.fromEntries(entries.filter(([, item]) => item === null || ["string", "number", "boolean"].includes(typeof item)).map(([key, item]) => [key, preview(item)])) };
+    }
+    return { $summary: "text", length: encoded.length, preview: String(value).slice(0, 256) };
+  };
+  return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, preview(value)]));
+};
 const sourceFor = (
   props: Record<string, unknown>,
   chain: string[],
@@ -134,7 +150,7 @@ const sourceFor = (
           file: "<programmatic>",
           line: 1,
           componentChain: chain,
-          parameters: serializable(props) as Record<string, unknown>,
+          parameters: parameterPreview(props),
         }
       : undefined;
   return {
@@ -142,7 +158,7 @@ const sourceFor = (
     line: raw.line,
     column: raw.column,
     componentChain: chain,
-    parameters: serializable(props) as Record<string, unknown>,
+    parameters: parameterPreview(props),
   };
 };
 const fail = (diagnostic: Diagnostic): never => {
@@ -218,7 +234,7 @@ function visit(
             key: segment,
             file: (props.__wdlSource as { file?: string } | undefined)?.file,
             line: (props.__wdlSource as { line?: number } | undefined)?.line,
-            parameters: serializable(props) as Record<string, unknown>,
+            parameters: parameterPreview(props),
           },
         ],
         componentRoot: true,

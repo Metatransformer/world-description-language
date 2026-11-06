@@ -148,6 +148,7 @@ export function buildSpace(manifest: WorldManifest, spaceId: string) {
     const mesh = new THREE.Mesh(shape, meshMaterial);
     mesh.name = object.name ?? object.id;
     mesh.userData.wdlId = object.id;
+    mesh.userData.wdlType = object.type;
     mesh.matrix.fromArray(object.matrix);
     mesh.matrixAutoUpdate = false;
     mesh.castShadow = object.type !== "terrain" && object.type !== "river";
@@ -173,6 +174,14 @@ export function buildSpace(manifest: WorldManifest, spaceId: string) {
   };
 }
 
+export function setDungeonCutaway(
+  objects: Map<string, THREE.Mesh>,
+  enabled: boolean,
+) {
+  for (const mesh of objects.values())
+    if (mesh.userData.wdlType === "dungeon-ceiling") mesh.visible = !enabled;
+}
+
 export function setSelected(objects: Map<string, THREE.Mesh>, id?: string) {
   for (const [objectId, mesh] of objects) {
     const selected =
@@ -180,6 +189,6 @@ export function setSelected(objects: Map<string, THREE.Mesh>, id?: string) {
     mesh.renderOrder = selected ? 2 : 0;
     const material = mesh.material as THREE.MeshStandardMaterial;
     material.emissive.set(selected ? "#d5a84d" : "#000000");
-    material.emissiveIntensity = selected ? 0.6 : 0;
+    material.emissiveIntensity = selected ? (String(mesh.userData.wdlType).startsWith("dungeon-") ? 0.08 : 0.6) : 0;
   }
 }

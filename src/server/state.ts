@@ -10,7 +10,7 @@ import {
 
 const ROOT = resolve(process.cwd());
 const ENTRY = resolve(ROOT, "worlds/valenreach.tsx");
-const SOURCE_ROOTS = [resolve(ROOT, "worlds"), resolve(ROOT, "src/wdl")];
+const SOURCE_ROOTS = [resolve(ROOT, "worlds"), resolve(ROOT, "src/wdl"), resolve(ROOT, "src/dungeon")];
 
 export type ViewerCamera = {
   position: [number, number, number];
@@ -51,6 +51,7 @@ class WdlSession {
     mode: "orbit",
   };
   command?: ViewerCommand;
+  lastNavigation?: ViewerCommand;
   private commandId = 0;
   private compileWork?: Promise<void>;
   private captures = new Map<number, CaptureWaiter>();
@@ -110,6 +111,7 @@ class WdlSession {
         camera: this.camera,
       },
       command: this.command,
+      lastNavigation: this.lastNavigation,
     };
   }
 
@@ -127,6 +129,7 @@ class WdlSession {
       command = { ...command, spaceId: object.spaceId };
     }
     this.command = { ...command, id: ++this.commandId };
+    if (command.kind !== "capture") this.lastNavigation = this.command;
     return this.command;
   }
   acknowledge(

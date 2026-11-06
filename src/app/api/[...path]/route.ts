@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { listProjectComponents } from "@/server/components";
 import { readProjectSource, session } from "@/server/state";
 
 export const runtime = "nodejs";
@@ -56,6 +57,10 @@ export async function GET(
 ) {
   try {
     const path = leaf(await context.params);
+    if (path === "components") {
+      await session.ensureFresh();
+      return NextResponse.json(await listProjectComponents(session.manifest));
+    }
     await ready();
     if (path === "state") return NextResponse.json(session.summary());
     if (path === "manifest") return NextResponse.json(session.manifest);

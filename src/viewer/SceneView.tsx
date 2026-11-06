@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { WorldManifest } from "../wdl/types";
 import type { ViewerCamera, ViewerCommand } from "../server/state";
-import { buildSpace, setSelected } from "./render";
+import { buildSpace, setDungeonCutaway, setSelected } from "./render";
 
 export function SceneView({
   manifest,
@@ -16,6 +16,7 @@ export function SceneView({
   onSelect,
   onCommand,
   onCamera,
+  dungeonCutaway = false,
 }: {
   manifest: WorldManifest;
   spaceId: string;
@@ -25,6 +26,7 @@ export function SceneView({
   onSelect: (id?: string) => void;
   onCommand: (id: number, camera: ViewerCamera) => void;
   onCamera: (camera: ViewerCamera) => void;
+  dungeonCutaway?: boolean;
 }) {
   const callbacks = useRef({ onSelect, onCommand, onCamera });
   callbacks.current = { onSelect, onCommand, onCamera };
@@ -51,7 +53,8 @@ export function SceneView({
     const element = host.current;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#172431");
-    scene.fog = new THREE.FogExp2("#526273", 0.0032);
+    const dungeon = manifest.spaces.find((space) => space.id === spaceId)?.properties.kind === "dungeon";
+    scene.fog = new THREE.FogExp2(dungeon ? "#182129" : "#526273", dungeon ? 0.006 : 0.0032);
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       preserveDrawingBuffer: true,
@@ -77,8 +80,9 @@ export function SceneView({
     controls.minDistance = 0.4;
     const world = buildSpace(manifest, spaceId);
     scene.add(world.group);
-    scene.add(new THREE.HemisphereLight("#b8d5e3", "#6c4d31", 2.2));
-    const sun = new THREE.DirectionalLight("#ffe2ad", 3.2);
+    setDungeonCutaway(world.objects, dungeonCutaway);
+    scene.add(new THREE.HemisphereLight(dungeon ? "#9eb0b8" : "#b8d5e3", dungeon ? "#342b25" : "#6c4d31", dungeon ? 2.6 : 2.2));
+    const sun = new THREE.DirectionalLight("#ffe2ad", dungeon ? 1.4 : 3.2);
     sun.position.set(-65, 110, 55);
     sun.castShadow = true;
     sun.shadow.mapSize.set(2048, 2048);
@@ -88,9 +92,19 @@ export function SceneView({
     sun.shadow.camera.far = 300;
     sun.shadow.bias = -0.00025;
     scene.add(sun);
+    if (dungeon) {
+      for (const marker of manifest.objects.filter((object) => object.spaceId === spaceId && object.type === "dungeon-light").slice(0, 12)) {
+        const color = typeof marker.properties.color === "string" ? marker.properties.color : "#ffc07a";
+        const intensity = typeof marker.properties.intensity === "number" ? marker.properties.intensity : 1.5;
+        const range = typeof marker.properties.range === "number" ? marker.properties.range : 9;
+        const light = new THREE.PointLight(color, Math.min(intensity, 3.5), Math.min(range, 24), 1.4);
+        light.position.set(marker.matrix[12], marker.matrix[13], marker.matrix[14]);
+        scene.add(light);
+      }
+    }
     const grid = new THREE.GridHelper(300, 60, "#526170", "#354351");
     grid.position.y = -0.15;
-    scene.add(grid);
+    if (!dungeon) scene.add(grid);
     state.current = {
       camera,
       renderer,
@@ -223,6 +237,9 @@ export function SceneView({
       state.current = undefined;
     };
   }, [manifest, spaceId]);
+  useEffect(() => {
+    if (state.current) setDungeonCutaway(state.current.objects, dungeonCutaway);
+  }, [dungeonCutaway]);
   useEffect(() => {
     if (state.current) setSelected(state.current.objects, selectedId);
   }, [selectedId]);

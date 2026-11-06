@@ -10,7 +10,6 @@ import {
   type Vec3,
 } from "../src/wdl/index.js";
 import {
-  DungeonRoom,
   HouseShell,
   InteriorRoom,
   Landscape,
@@ -20,6 +19,10 @@ import {
   terrainHeight,
   type ArchitectureOptions,
 } from "./kits.js";
+
+import { DungeonSpace } from "../src/dungeon/components.js";
+import { dungeonMaterials } from "../src/dungeon/kits.js";
+import { ashBarrowPlan, sunkenCisternPlan } from "./dungeons.js";
 
 export type ValenreachOptions = Partial<ArchitectureOptions> & {
   extraBuildingVariant?: "tower" | "courtyard";
@@ -370,76 +373,10 @@ function HouseInterior({
   );
 }
 
-function Dungeon({
-  id,
-  name,
-  variant,
-}: {
-  id: string;
-  name: string;
-  variant: number;
-}) {
-  const rooms: Array<[Vec3, Vec3, string]> =
-    variant === 1
-      ? [
-          [[0, 0, 0], [12, 4, 10], "Entry Crypt"],
-          [[0, 0, -18], [16, 4, 12], "Ash Hall"],
-          [[18, 2, -18], [12, 4, 12], "Reliquary"],
-          [[18, -2, -38], [18, 4, 14], "Lower Vault"],
-        ]
-      : [
-          [[0, 0, 0], [14, 4, 12], "Drain Mouth"],
-          [[-18, -2, -12], [14, 4, 14], "Flooded Gallery"],
-          [[-36, -4, -12], [16, 4, 11], "Valve Hall"],
-          [[-36, -7, -32], [20, 4, 16], "Deep Shrine"],
-        ];
-  return (
-    <Space
-      key={id}
-      name={name}
-      properties={{ kind: "dungeon", plan: "worlds/references/dungeon.svg" }}
-    >
-      {rooms.map(([position, size, roomName], i) => (
-        <DungeonRoom
-          key={`room-${i}`}
-          position={position}
-          size={size}
-          name={roomName}
-        />
-      ))}
-      {rooms.slice(0, -1).map(([start], i) => {
-        const end = rooms[i + 1]![0],
-          dx = end[0] - start[0],
-          dy = end[1] - start[1],
-          dz = end[2] - start[2];
-        const length = Math.hypot(dx, dz),
-          middle: Vec3 = [
-            (start[0] + end[0]) / 2,
-            (start[1] + end[1]) / 2,
-            (start[2] + end[2]) / 2,
-          ];
-        return (
-          <Mesh
-            key={`passage-${i}`}
-            type="dungeon-passage"
-            position={middle}
-            rotation={[-Math.atan2(dy, length), Math.atan2(dx, dz), 0]}
-            geometry={{ shape: "box", size: [4, 0.3, Math.hypot(length, dy)] }}
-            material="dungeon"
-          />
-        );
-      })}
-      <Connection
-        key="return"
-        id={`exit-${id}`}
-        to="outside"
-        arrival={
-          variant === 1 ? [-82, terrainHeight(-82, -44) + 2, -44] : [88, 2, 56]
-        }
-        bidirectional
-      />
-    </Space>
-  );
+function Dungeon({ id, name, variant }: { id: string; name: string; variant: number }) {
+  return <DungeonSpace key="generated-space" id={id} name={name}
+    plan={variant === 1 ? ashBarrowPlan : sunkenCisternPlan}
+    returnArrival={variant === 1 ? [-82, terrainHeight(-82, -44) + 2, -44] : [88, 2, 56]} />;
 }
 
 export function createValenreach(overrides: ValenreachOptions = {}) {
@@ -457,7 +394,7 @@ export function createValenreach(overrides: ValenreachOptions = {}) {
     <World
       key="world"
       name="Valenreach"
-      materials={materialKit}
+      materials={[...materialKit, ...dungeonMaterials]}
       references={[
         {
           id: "architecture-brief",

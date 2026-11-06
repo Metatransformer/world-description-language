@@ -3,6 +3,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { WorldManifest, WorldObject } from "../wdl/types";
 import type { ViewerCamera, ViewerCommand } from "../server/state";
+import type { DungeonPlan, DungeonRoom } from "../dungeon/types";
+import { DungeonMap, dungeonMapBounds } from "./DungeonMap";
+import { ComponentBrowser } from "./ComponentBrowser";
+import { CodeView } from "./CodeView";
 import { SceneView } from "./SceneView";
 
 type Summary = {
@@ -18,6 +22,7 @@ type Summary = {
   };
   session: { spaceId: string; selectedId?: string; camera: ViewerCamera };
   command?: ViewerCommand;
+  lastNavigation?: ViewerCommand;
 };
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api/${path}`, init);
@@ -33,6 +38,7 @@ const post = <T,>(path: string, body: unknown = {}) =>
   });
 
 export function WorldEditor() {
+  const [componentBrowser, setComponentBrowser] = useState<{ name?: string }>();
   const [referenceView, setReferenceView] = useState<{
     title: string;
     content: string;
@@ -45,14 +51,17 @@ export function WorldEditor() {
   const [query, setQuery] = useState("");
   const [source, setSource] = useState<{ file: string; content: string }>();
   const [notice, setNotice] = useState<string>();
+  const [dungeonCutaway, setDungeonCutaway] = useState(true);
   const [returnTo, setReturnTo] = useState<{
     spaceId: string;
     targetId?: string;
   }>();
   const revision = useRef(0);
+  const receivedNavigation = useRef(0);
   const refresh = useCallback(async () => {
     const next = await api<Summary>("state");
-    setSummary(next);
+    const delivered = next.command ?? next.lastNavigation;
+    setSummary({ ...next, command: delivered });
     if (!manifest || next.revision !== revision.current) {
       const world = await api<WorldManifest>("manifest");
       revision.current = next.revision;
@@ -68,8 +77,10 @@ export function WorldEditor() {
           : next.session.selectedId,
       );
     }
-    if (next.command?.spaceId && next.command.spaceId !== spaceId)
-      setSpaceId(next.command.spaceId);
+    if (delivered && delivered.id > receivedNavigation.current) {
+      receivedNavigation.current = delivered.id;
+      if (delivered.spaceId) setSpaceId(delivered.spaceId);
+    }
   }, [manifest, spaceId]);
   useEffect(() => {
     void refresh().catch((error) => setNotice(error.message));
@@ -82,6 +93,16 @@ export function WorldEditor() {
     [manifest, spaceId],
   );
   const selected = manifest?.objects.find((object) => object.id === selectedId);
+  const currentSpace = manifest?.spaces.find((space) => space.id === spaceId);
+  const dungeonPlan =
+    currentSpace?.properties.kind === "dungeon"
+      ? (currentSpace.properties.dungeonPlan as DungeonPlan | undefined)
+      : undefined;
+  const selectedRoomId =
+    selected?.type === "dungeon-room" &&
+    typeof selected.properties.roomId === "string"
+      ? selected.properties.roomId
+      : undefined;
   const search = query.trim().toLowerCase();
   const results = useMemo(
     () =>
@@ -129,6 +150,93 @@ export function WorldEditor() {
   const focus = (object: WorldObject) => {
     select(object.id);
     void post("command", { kind: "navigate", spaceId, targetId: object.id });
+  };
+  const dungeonRoomObject = (room: DungeonRoom) =>
+    objects.find(
+      (object) =>
+        object.type === "dungeon-room" &&
+        object.properties.roomId === room.id,
+    );
+  const issueDungeonCamera = (
+    room: DungeonRoom,
+    camera: ViewerCamera,
+  ) => {
+    const object = dungeonRoomObject(room);
+    if (!object) {
+      setNotice(`Compiled room object is missing for ${room.name}.`);
+      return;
+    }
+    setSelectedId(object.id);
+    void post("command", {
+      kind: "navigate",
+      spaceId,
+      targetId: object.id,
+      camera,
+    })
+      .then(refresh)
+      .catch((error) => setNotice(error.message));
+  };
+  const frameDungeonRoom = (room: DungeonRoom) => {
+    const span = Math.max(room.size[0], room.size[2]);
+    issueDungeonCamera(room, {
+      position: [
+        room.position[0] + span * 0.9,
+        room.position[1] + room.size[1] + span * 0.5,
+        room.position[2] + span * 0.9,
+      ],
+      target: [
+        room.position[0],
+        room.position[1] + room.size[1] * 0.45,
+        room.position[2],
+      ],
+      mode: "orbit",
+    });
+  };
+  const exploreDungeonRoom = (room: DungeonRoom) => {
+    const corridor = dungeonPlan?.corridors.find(
+      (item) => item.from === room.id || item.to === room.id,
+    );
+    const otherId = corridor
+      ? corridor.from === room.id
+        ? corridor.to
+        : corridor.from
+      : undefined;
+    const other = dungeonPlan?.rooms.find((item) => item.id === otherId);
+    const dx = (other?.position[0] ?? room.position[0]) - room.position[0];
+    const dz = (other?.position[2] ?? room.position[2] - 1) - room.position[2];
+    const length = Math.hypot(dx, dz) || 1;
+    const eye: [number, number, number] = [
+      room.position[0],
+      room.position[1] + 2,
+      room.position[2],
+    ];
+    issueDungeonCamera(room, {
+      position: eye,
+      target: [eye[0] + (dx / length) * 5, eye[1], eye[2] + (dz / length) * 5],
+      mode: "fly",
+    });
+  };
+  const overviewDungeon = () => {
+    if (!dungeonPlan) return;
+    const bounds = dungeonMapBounds(dungeonPlan);
+    const center: [number, number, number] = [
+      (bounds.minX + bounds.maxX) / 2,
+      (bounds.minY + bounds.maxY) / 2,
+      (bounds.minZ + bounds.maxZ) / 2,
+    ];
+    const span = Math.max(bounds.maxX - bounds.minX, bounds.maxZ - bounds.minZ, 20);
+    setSelectedId(undefined);
+    void post("command", {
+      kind: "navigate",
+      spaceId,
+      camera: {
+        position: [center[0] + span * 1.1, center[1] + span * 1.6, center[2] + span * 1.1],
+        target: center,
+        mode: "orbit",
+      },
+    })
+      .then(refresh)
+      .catch((error) => setNotice(error.message));
   };
   const switchSpace = (
     id: string,
@@ -193,6 +301,7 @@ export function WorldEditor() {
         >
           ↻ Recompile
         </button>
+        <button onClick={() => setComponentBrowser({})}>Components</button>
         <button
           className="primary"
           onClick={() =>
@@ -271,6 +380,7 @@ export function WorldEditor() {
             command={summary.command}
             initialCamera={summary.session.camera}
             onSelect={select}
+            dungeonCutaway={Boolean(dungeonPlan && dungeonCutaway)}
             onCamera={(camera) =>
               void post("viewer", { spaceId, selectedId, camera })
             }
@@ -288,6 +398,18 @@ export function WorldEditor() {
               }).then(refresh);
             }}
           />
+          {dungeonPlan && currentSpace && (
+            <DungeonMap
+              name={currentSpace.name}
+              plan={dungeonPlan}
+              selectedRoomId={selectedRoomId}
+              cutaway={dungeonCutaway}
+              onCutawayChange={setDungeonCutaway}
+              onRoomSelect={frameDungeonRoom}
+              onExploreRoom={exploreDungeonRoom}
+              onOverview={overviewDungeon}
+            />
+          )}
           <div className="viewport-top">
             <span>
               {manifest.spaces.find((space) => space.id === spaceId)?.name}
@@ -369,7 +491,7 @@ export function WorldEditor() {
                 </div>
                 {selected.source?.componentChain && (
                   <div className="chain">
-                    {selected.source.componentChain.join(" › ")}
+                    {selected.source.componentChain.map((name, index) => <button key={`${name}-${index}`} onClick={() => setComponentBrowser({ name })}>{name}</button>)}
                   </div>
                 )}
                 <pre className="code">
@@ -452,6 +574,14 @@ export function WorldEditor() {
           )}
         </aside>
       </section>
+      {componentBrowser && <ComponentBrowser initialName={componentBrowser.name} revision={summary.revision}
+        onClose={() => setComponentBrowser(undefined)}
+        onInspect={(id, targetSpace) => {
+          setComponentBrowser(undefined);
+          setSpaceId(targetSpace);
+          setSelectedId(id);
+          void post("command", { kind: "navigate", spaceId: targetSpace, targetId: id }).then(refresh);
+        }} />}
       {referenceView && (
         <div
           className="reference-modal"
@@ -466,6 +596,8 @@ export function WorldEditor() {
                 alt={referenceView.title}
                 src={`data:image/svg+xml,${encodeURIComponent(referenceView.content)}`}
               />
+            ) : referenceView.kind === "source" ? (
+              <CodeView code={referenceView.content} />
             ) : (
               <pre>{referenceView.content}</pre>
             )}
