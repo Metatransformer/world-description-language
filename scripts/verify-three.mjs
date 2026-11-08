@@ -19,6 +19,20 @@ try {
   await page.keyboard.up("KeyW");
   await page.keyboard.press("KeyE");
   await page.getByText("DUNGEON · Coins: 0", { exact: true }).waitFor();
+  async function walk(key, ms) {
+    await page.keyboard.down(key); await page.waitForTimeout(ms); await page.keyboard.up(key);
+  }
+  await walk("KeyA", 1000);
+  await walk("KeyW", 1500);
+  await page.getByText("[E] Toggle dungeon gate", { exact: true }).waitFor();
+  await page.keyboard.press("KeyE");
+  await walk("KeyD", 1000);
+  await walk("KeyW", 2600);
+  await page.getByText("[E] Collect ancient coin", { exact: true }).waitFor();
+  await page.keyboard.press("KeyE");
+  await page.getByText("DUNGEON · Coins: 1", { exact: true }).waitFor();
+  await page.keyboard.press("KeyE");
+  assert.equal(await page.locator("#place").textContent(), "DUNGEON · Coins: 1");
   assert.deepEqual(errors, []);
-  console.log("WDL_THREE_OK: rendered world, walked town and exterior, traversed portals into dungeon.");
+  console.log("WDL_THREE_OK: walked town/exterior/dungeon, opened gate, collected group-bound chest once.");
 } finally { await browser.close(); }

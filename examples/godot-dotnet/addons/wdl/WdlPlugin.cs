@@ -11,6 +11,7 @@ namespace Wdl;
 public partial class WdlPlugin : EditorPlugin
 {
     private VBoxContainer _dock = null!;
+    private EditorDock _host = null!;
     private Label _status = null!;
     private LineEdit _node = null!;
     private LineEdit _repository = null!;
@@ -19,9 +20,12 @@ public partial class WdlPlugin : EditorPlugin
     private int _completed;
     private int _exitCode;
     private bool _watch;
+    private bool _started;
     private string _revision = "";
     public override void _EnterTree()
     {
+        if (Godot.FileAccess.FileExists("res://generated/imported-revision.txt"))
+            _revision = Godot.FileAccess.GetFileAsString("res://generated/imported-revision.txt");
         _dock = new VBoxContainer { Name = "WDL" };
         _dock.AddChild(new Label { Text = "WDL / JSX world builds" });
         _node = new LineEdit { Text = "node", PlaceholderText = "Node executable" };
@@ -38,7 +42,9 @@ public partial class WdlPlugin : EditorPlugin
         AddButton("Import latest successful build", Import);
         _status = new Label { Text = "Ready. Generated internals are owned by JSX.", AutowrapMode = TextServer.AutowrapMode.WordSmart };
         _dock.AddChild(_status);
-        AddControlToDock(DockSlot.RightUl, _dock);
+        _host = new EditorDock { Title = "WDL", DefaultSlot = EditorDock.DockSlot.RightUl };
+        _host.AddChild(_dock);
+        AddDock(_host);
         SetProcess(true);
     }
     private void AddButton(string text, Action callback)
@@ -59,9 +65,10 @@ public partial class WdlPlugin : EditorPlugin
             if (all) info.ArgumentList.Add("--all");
             if (watch) info.ArgumentList.Add("--watch");
             _process = new Process { StartInfo = info, EnableRaisingEvents = true };
+            _started = false;
             _process.Exited += (_, _) => { _exitCode = _process?.ExitCode ?? -1; Interlocked.Exchange(ref _completed, 1); };
             _watch = watch;
-            _process.Start();
+            _started = _process.Start();
             _status.Text = watch ? "Watching dependencies…" : "Building…";
         }
         catch (Exception error) { Stop(); _status.Text = error.Message; }
@@ -70,7 +77,7 @@ public partial class WdlPlugin : EditorPlugin
     {
         if (Interlocked.Exchange(ref _completed, 0) == 1)
         {
-            _process?.Dispose(); _process = null;
+            _process?.Dispose(); _process = null; _started = false;
             if (_exitCode == 0) Import(); else _status.Text = "Build failed. Previous assets retained; see output.";
         }
         if (_watch && Godot.FileAccess.FileExists("res://generated/revision.txt"))
@@ -84,7 +91,6 @@ public partial class WdlPlugin : EditorPlugin
         try
         {
             var revision = Godot.FileAccess.GetFileAsString("res://generated/revision.txt");
-            if (revision == _revision) { _status.Text = "No changed assets."; return; }
             SceneImporter.Import();
             _revision = revision;
             EditorInterface.Singleton.GetResourceFilesystem().Scan();
@@ -95,9 +101,10 @@ public partial class WdlPlugin : EditorPlugin
     private void Stop()
     {
         _watch = false;
-        if (_process != null) { if (!_process.HasExited) _process.Kill(true); _process.Dispose(); _process = null; }
+        if (_process != null) { if (_started && !_process.HasExited) _process.Kill(true); _process.Dispose(); _process = null; }
+        _started = false;
         Interlocked.Exchange(ref _completed, 0);
     }
-    public override void _ExitTree() { Stop(); RemoveControlFromDocks(_dock); _dock.QueueFree(); }
+    public override void _ExitTree() { Stop(); RemoveDock(_host); _host.QueueFree(); }
 }
 #endif

@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { WorldRuntime } from "../../src/runtime/runtime.js";
 import type { BehaviorArtifact } from "../../src/runtime/contract.js";
+import type { WorldManifest } from "../../src/wdl/types.js";
 
 const status = document.querySelector<HTMLParagraphElement>("#status")!;
 const place = document.querySelector<HTMLParagraphElement>("#place")!;
@@ -26,6 +27,7 @@ let bounds = new Map<string, THREE.Box3>();
 let elapsed = performance.now();
 let target: string | undefined;
 const contract: BehaviorArtifact = await (await fetch("/behavior.json")).json();
+const manifest: WorldManifest = await (await fetch("/manifest.json")).json();
 const index: { spaces: Array<{ id: string; file: string; nodes: string[] }> } = await (await fetch("/index.json")).json();
 const runtime = new WorldRuntime(contract, {
   "world.travel": async args => { await travel(String(args.space), new THREE.Vector3(Number(args.x), Number(args.y) - 1, Number(args.z))); },
@@ -62,6 +64,26 @@ async function travel(id: string, arrival: THREE.Vector3) {
     bounds.set(objectId, new THREE.Box3().setFromObject(object));
     if (object instanceof THREE.Mesh) { object.castShadow = true; object.receiveShadow = true; }
   });
+  const authored = manifest.objects.filter(object => object.spaceId === id);
+  const matrices = new Map(authored.map(object => [object.id, new THREE.Matrix4().fromArray(object.matrix)]));
+  for (const item of authored) {
+    if (!objects.has(item.id)) {
+      const group = new THREE.Group();
+      space.add(group); objects.set(item.id, group);
+    }
+    const node = objects.get(item.id)!;
+    node.removeFromParent(); space.add(node);
+    node.matrixAutoUpdate = false;
+    node.matrix.copy(matrices.get(item.id)!);
+  }
+  for (const item of authored) {
+    if (!item.parentId) continue;
+    const parent = objects.get(item.parentId), node = objects.get(item.id)!;
+    if (!parent) continue;
+    parent.add(node);
+    node.matrix.copy(matrices.get(item.parentId)!.clone().invert().multiply(matrices.get(item.id)!));
+  }
+  space.updateMatrixWorld(true);
   spaceId = id; player.copy(arrival); refresh(); status.textContent = "Entered " + id;
 }
 function blocked(position: THREE.Vector3) {
@@ -113,7 +135,9 @@ renderer.setAnimationLoop(() => {
   camera.position.copy(player).add(new THREE.Vector3(0, 1.6, 0));
   target = undefined; let nearest = 3;
   for (const [id, object] of objects) {
-    if (!contract.objects[id]?.interact || !object.visible) continue;
+    let visible = true;
+    for (let cursor: THREE.Object3D | null = object; cursor; cursor = cursor.parent) visible &&= cursor.visible;
+    if (!contract.objects[id]?.interact || !visible) continue;
     const distance = object.getWorldPosition(new THREE.Vector3()).distanceTo(player.clone().add(new THREE.Vector3(0, 1, 0)));
     if (distance < nearest) { nearest = distance; target = id; }
   }

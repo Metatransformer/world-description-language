@@ -24,7 +24,9 @@ public partial class Main : Node3D
         {
             if (OS.GetCmdlineUserArgs().Contains("--import-wdl"))
             {
-                SceneImporter.Import();
+                var userArgs = OS.GetCmdlineUserArgs();
+                var folderIndex = Array.IndexOf(userArgs, "--folder");
+                SceneImporter.Import(folderIndex >= 0 ? userArgs[folderIndex + 1] : "res://generated");
                 GD.Print("WDL_IMPORT_OK");
                 GetTree().Quit();
                 return;
@@ -162,6 +164,19 @@ public partial class Main : Node3D
             if (_coins != 1) throw new Exception("Chest granted more than once");
             var save = _runtime.Snapshot(); _runtime.Restore(save);
             if (_runtime.Binding(chest, "visible", true)) throw new Exception("Chest did not persist");
+            var catalog = SceneImporter.Read("res://generated/scenes.json");
+            if (catalog[gate] == null) throw new Exception("Mesh-root component was not exported");
+            var firstGate = GD.Load<PackedScene>(catalog[gate]!.GetValue<string>()).Instantiate<WdlScene>();
+            var secondGate = GD.Load<PackedScene>(catalog[gate]!.GetValue<string>()).Instantiate<WdlScene>();
+            AddChild(firstGate); AddChild(secondGate);
+            firstGate.Position = new Vector3(30, 0, 0); secondGate.Position = new Vector3(-30, 0, 0);
+            firstGate.InstanceId = "gate-a"; secondGate.InstanceId = "gate-b";
+            var emptyCapabilities = new Dictionary<string, Func<JsonObject, Task>>();
+            firstGate.Initialize(emptyCapabilities); secondGate.Initialize(emptyCapabilities);
+            await firstGate.Runtime!.Dispatch("quest", "toggleGate");
+            if (firstGate.Runtime.Binding(gate, "solid", true) || !secondGate.Runtime!.Binding(gate, "solid", false))
+                throw new Exception("Placed components share private runtime state");
+            firstGate.QueueFree(); secondGate.QueueFree();
             GD.Print("WDL_SMOKE_OK spaces=5 gate=open chest=collected coins=1");
             GetTree().Quit();
         }

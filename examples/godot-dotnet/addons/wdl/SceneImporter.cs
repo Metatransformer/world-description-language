@@ -25,10 +25,34 @@ public static class SceneImporter
         var destination = folder + "/scenes";
         IO.Directory.CreateDirectory(ProjectSettings.GlobalizePath(destination));
         var catalog = new JsonObject();
+        var signatures = new JsonObject();
+        var oldSignatures = FileAccess.FileExists(folder + "/import-signatures.json") ? Read(folder + "/import-signatures.json") : new JsonObject();
+        var oldCatalog = FileAccess.FileExists(folder + "/scenes.json") ? Read(folder + "/scenes.json") : new JsonObject();
         foreach (var entry in index["spaces"]!.AsArray())
         {
             var space = entry!;
             var id = space["id"]!.GetValue<string>();
+            var objects = manifest["objects"]!.AsArray().Where(o => o!["spaceId"]!.GetValue<string>() == id).Select(o => o!).ToArray();
+            var objectIds = objects.Select(o => o["id"]!.GetValue<string>()).ToArray();
+            var spaceContract = ContractFor(objectIds, behavior);
+            var importerSource = FileAccess.GetFileAsString("res://addons/wdl/SceneImporter.cs");
+            var gltfText = FileAccess.GetFileAsString(folder + "/" + space["file"]!.GetValue<string>());
+            var gltf = JsonNode.Parse(gltfText)!;
+            var source = gltfText
+                + string.Join("", objects.Select(o => o.ToJsonString())) + spaceContract.ToJsonString()
+                + importerSource;
+            var signature = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(source)));
+            signatures[id] = signature;
+            var keys = objectIds.Prepend(id).ToArray();
+            if (oldSignatures[id]?.GetValue<string>() == signature
+                && keys.All(key => oldCatalog[key] is JsonValue path && FileAccess.FileExists(path.GetValue<string>())
+                    && FileAccess.FileExists(path.GetValue<string>().Replace(".tscn", ".behavior.json"))))
+            {
+                foreach (var key in keys) catalog[key] = oldCatalog[key]!.DeepClone();
+                foreach (var key in objectIds)
+                    if (oldSignatures["component:" + key] != null) signatures["component:" + key] = oldSignatures["component:" + key]!.DeepClone();
+                continue;
+            }
             var state = new GltfState();
             var document = new GltfDocument();
             var error = document.AppendFromFile(folder + "/" + space["file"]!.GetValue<string>(), state);
@@ -46,7 +70,6 @@ public static class SceneImporter
                 node.GetParent()?.RemoveChild(node);
                 nodes[meshIds[i]!.GetValue<string>()] = node;
             }
-            var objects = manifest["objects"]!.AsArray().Where(o => o!["spaceId"]!.GetValue<string>() == id).Select(o => o!).ToArray();
             foreach (var item in objects)
             {
                 var objectId = item["id"]!.GetValue<string>();
@@ -76,69 +99,127 @@ public static class SceneImporter
                 parent.AddChild(node);
                 node.Transform = Transform(parentObject["matrix"]!.AsArray()).AffineInverse() * Transform(item["matrix"]!.AsArray());
             }
-            WriteContract(root, behavior, destination + "/" + id + ".behavior.json");
-            Save(root, destination + "/" + id + ".tscn");
-            catalog[id] = destination + "/" + id + ".tscn";
-            foreach (var item in objects.Where(o => o["geometry"] == null))
+            var scenePath = destination + "/" + IO.Path.GetFileNameWithoutExtension(space["file"]!.GetValue<string>()) + ".tscn";
+            WriteContract(root, behavior, scenePath.Replace(".tscn", ".behavior.json"));
+            Save(root, scenePath);
+            catalog[id] = scenePath;
+            foreach (var item in objects)
             {
                 var objectId = item["id"]!.GetValue<string>();
+                var descendants = objects.Where(o => o["id"]!.GetValue<string>() == objectId || o["id"]!.GetValue<string>().StartsWith(objectId + "/", StringComparison.Ordinal)).ToArray();
+                var componentSource = importerSource + ContractFor(descendants.Select(o => o["id"]!.GetValue<string>()), behavior).ToJsonString();
+                foreach (var descendant in descendants)
+                {
+                    var record = descendant.DeepClone().AsObject();
+                    record.Remove("source");
+                    componentSource += record.ToJsonString();
+                    var materialId = descendant["material"]?.GetValue<string>();
+                    if (materialId != null)
+                    {
+                        var material = manifest["materials"]!.AsArray().First(m => m!["id"]!.GetValue<string>() == materialId)!;
+                        componentSource += material.ToJsonString();
+                        var materialIndex = manifest["materials"]!.AsArray().IndexOf(material);
+                        var textureIndex = gltf["materials"]![materialIndex]!["pbrMetallicRoughness"]?["baseColorTexture"]?["index"];
+                        if (textureIndex != null)
+                        {
+                            var imageIndex = gltf["textures"]![textureIndex.GetValue<int>()]!["source"]!.GetValue<int>();
+                            componentSource += gltf["images"]![imageIndex]!.ToJsonString();
+                        }
+                    }
+                }
+                var componentSignature = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(componentSource)));
+                signatures["component:" + objectId] = componentSignature;
+                var path = destination + "/component-" + Filename(objectId) + ".tscn";
+                catalog[objectId] = path;
+                if (oldSignatures["component:" + objectId]?.GetValue<string>() == componentSignature
+                    && FileAccess.FileExists(path) && FileAccess.FileExists(path.Replace(".tscn", ".behavior.json"))) continue;
                 var component = new WdlScene { Name = "Component" };
                 var copy = (Node3D)nodes[objectId].Duplicate();
                 ClearOwners(copy);
                 copy.Transform = Transform3D.Identity;
                 component.AddChild(copy);
-                var path = destination + "/component-" + Filename(objectId) + ".tscn";
                 WriteContract(component, behavior, path.Replace(".tscn", ".behavior.json"));
                 Save(component, path);
-                catalog[objectId] = path;
                 component.Free();
             }
             root.Free();
             imported.Free();
         }
-        IO.File.WriteAllText(ProjectSettings.GlobalizePath(folder + "/scenes.json"), catalog.ToJsonString(new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
-        IO.File.WriteAllText(ProjectSettings.GlobalizePath(folder + "/imported-revision.txt"), FileAccess.GetFileAsString(folder + "/revision.txt"));
+        WriteChanged(folder + "/scenes.json", catalog.ToJsonString(new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+        WriteChanged(folder + "/import-signatures.json", signatures.ToJsonString());
+        WriteChanged(folder + "/imported-revision.txt", FileAccess.GetFileAsString(folder + "/revision.txt"));
+        foreach (var old in oldCatalog)
+            if (!catalog.ContainsKey(old.Key))
+            {
+                var path = old.Value!.GetValue<string>();
+                if (path.StartsWith(destination + "/", StringComparison.Ordinal))
+                {
+                    IO.File.Delete(ProjectSettings.GlobalizePath(path));
+                    IO.File.Delete(ProjectSettings.GlobalizePath(path.Replace(".tscn", ".behavior.json")));
+                }
+            }
     }
     private static void WriteContract(WdlScene root, JsonObject behavior, string path)
     {
-        var objects = new JsonObject();
+        var ids = new List<string>();
         void Visit(Node node)
         {
             if (node.HasMeta("wdl_id"))
             {
                 var id = node.GetMeta("wdl_id").AsString();
-                objects[id] = behavior["objects"]![id]!.DeepClone();
+                ids.Add(id);
             }
             foreach (Node child in node.GetChildren()) Visit(child);
         }
         Visit(root);
+        var contract = ContractFor(ids, behavior);
+        WriteChanged(path, contract.ToJsonString());
+        root.BehaviorPath = path;
+    }
+    private static JsonObject ContractFor(IEnumerable<string> ids, JsonObject behavior)
+    {
+        var objects = new JsonObject();
+        foreach (var id in ids) objects[id] = behavior["objects"]![id]!.DeepClone();
         var stores = new JsonObject();
         var capabilities = new JsonObject();
         var required = new HashSet<string>();
-        void References(JsonNode? node)
+        void Expression(JsonNode? node)
         {
             if (node is JsonObject obj)
             {
-                if (obj["store"] is JsonValue store) required.Add(store.GetValue<string>());
-                if (obj["capability"] is JsonValue cap)
-                {
-                    var key = cap.GetValue<string>();
-                    capabilities[key] = behavior["capabilities"]![key]!.DeepClone();
-                }
-                foreach (var pair in obj) References(pair.Value);
+                if (obj.ContainsKey("read")) required.Add(obj["store"]!.GetValue<string>());
+                else if (obj["not"] is JsonNode inner) Expression(inner);
             }
-            else if (node is JsonArray array) foreach (var value in array) References(value);
         }
-        References(objects);
+        foreach (var descriptor in objects.Select(pair => pair.Value!))
+        {
+            if (descriptor["interact"] is JsonObject interaction) required.Add(interaction["store"]!.GetValue<string>());
+            if (descriptor["bindings"] is JsonObject bindings) foreach (var binding in bindings) Expression(binding.Value);
+        }
         while (required.Any(id => !stores.ContainsKey(id)))
             foreach (var id in required.Where(id => !stores.ContainsKey(id)).ToArray())
             {
                 stores[id] = behavior["stores"]![id]!.DeepClone();
-                References(stores[id]);
+                foreach (var action in stores[id]!["actions"]!.AsObject())
+                {
+                    Expression(action.Value!["when"]);
+                    foreach (var step in action.Value["steps"]!.AsArray())
+                    {
+                        var op = step!["op"]!.GetValue<string>();
+                        if (op == "set") Expression(step["value"]);
+                        if (op != "effect") continue;
+                        var key = step["capability"]!.GetValue<string>();
+                        capabilities[key] = behavior["capabilities"]![key]!.DeepClone();
+                        foreach (var arg in step["args"]!.AsObject()) Expression(arg.Value);
+                    }
+                }
             }
-        var contract = new JsonObject { ["version"] = 1, ["objects"] = objects, ["stores"] = stores, ["capabilities"] = capabilities };
-        IO.File.WriteAllText(ProjectSettings.GlobalizePath(path), contract.ToJsonString());
-        root.BehaviorPath = path;
+        return new JsonObject { ["version"] = 1, ["objects"] = objects, ["stores"] = stores, ["capabilities"] = capabilities };
+    }
+    private static void WriteChanged(string path, string text)
+    {
+        var absolute = ProjectSettings.GlobalizePath(path);
+        if (!IO.File.Exists(absolute) || IO.File.ReadAllText(absolute) != text) IO.File.WriteAllText(absolute, text);
     }
     private static void ClearOwners(Node node)
     {

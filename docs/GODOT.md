@@ -2,6 +2,8 @@
 
 The Alder Vale demo compiles JSX into five textured spaces: town, woodland, inn, cottage, and dungeon. Both engines execute the same state/action contract. Godot uses C#/.NET; no JavaScript runtime ships in the Godot game.
 
+![Alder Vale rendered in the Godot C# demo](images/alder-vale-godot.png)
+
 ## Run the Godot demo
 
 Requires Node 22.12+, dependencies installed with `npm ci`, the .NET SDK, and **Godot 4.7.2 .NET** (the SDK version used by this demo).
@@ -38,6 +40,7 @@ Edit `worlds/rpg.tsx` for composition and `worlds/rpg-kit.tsx` for reusable comp
 - A group with `properties.wdl.scope` declares private state. Descendants use `read("field")` and `action("name")`; the compiler resolves those references without manually authored object IDs.
 - `read("field", "quest")` references a declared shared store. No parent should reach into another component's generated internals.
 - `properties.wdl.bindings` currently supports boolean `visible` and `solid`.
+- Visibility and interactions can belong to groups or meshes. Solid/collision bindings require mesh geometry and are rejected on groups.
 - `properties.wdl.interact` declares an input action; the game decides how input is detected.
 - Reducers support set, toggle, add, and conditional execution. Expressions support literals, state reads, and boolean not. Fields are typed scalar values in this first contract version.
 - Expressions read the pre-action snapshot; reducer writes commit together before effects run. Effects execute in declaration order and dispatch success/failure actions. A store rejects new external actions while its effects are pending.
@@ -53,7 +56,7 @@ The compiler validates reference targets, field types, action names, conditions,
 
 The build also emits `CapabilityBindings.cs` and `capabilities.ts`. The C# factory requires typed delegates for each declared capability. See the demo's call to `Wdl.Generated.CapabilityBindings.Create`. The TypeScript interface describes the same implementation contract. Missing implementations are rejected before interaction.
 
-The importer generates native `.tscn` files for spaces and every non-mesh component group, plus a `scenes.json` catalog mapping authored identities to scene paths. Component geometry is rebased to its own origin, with nested transforms preserved. Each exported root has a `WdlScene` script and a reduced contract containing its reachable stores/capabilities.
+The importer generates native `.tscn` files for spaces and every component group or mesh, plus a `scenes.json` catalog mapping authored identities to scene paths. Component geometry is rebased to its own origin, with nested transforms preserved. Each exported root has a `WdlScene` script and a reduced contract containing its reachable stores/capabilities. Per-space and per-component fingerprints skip unchanged native imports.
 
 ## Use in another Godot .NET game
 
@@ -67,6 +70,8 @@ The importer generates native `.tscn` files for spaces and every non-mesh compon
 Build-time props remain in JSX. Runtime inputs are the declared stores/actions and registered capabilities; this initial version does not generate editable Godot Inspector controls for arbitrary JSX props. Changing compiled props means rebuilding. Engine-side placement of exported scenes is supported; editing generated internals is not a round-trip authoring workflow.
 
 For a complete world, the demo keeps one runtime across scene changes. For separately placed components, `Initialize` owns independent state; explicitly sharing a runtime shares matching state handles. Geometry is imported as native meshes with static collision; the adapter updates collision layers from state bindings.
+
+When exporting a standalone Godot game, include the generated JSON files in the export preset's non-resource include filters (for example `generated/*.json,generated/scenes/*.json`). Generate the native scenes before exporting. JSON contracts are read through FileAccess, so Godot cannot infer them as PackedScene resource dependencies.
 
 ## Build control
 
@@ -100,3 +105,5 @@ godot --headless --path examples/godot-dotnet -- --smoke-test
 ```
 
 `game:verify` compares JS and standalone C# results for a shared sequence covering gate state, asynchronous failure/retry, duplicate suppression, instance isolation, and persistence. It also checks unchanged artifact mtimes. With the Three.js server running, `node scripts/verify-three.mjs` walks through town and woodland portals in Chrome. Set `PLAYWRIGHT_CHANNEL` to another installed Playwright browser channel when needed.
+
+Validated locally: TypeScript checking; 21 unit tests (2 optional MCP checks skipped); Next.js production build; all 6 workbench browser cases (the Windows component-search case passed after path normalization); JS/C# parity and build-failure checks; Three.js production build and walking/gate/chest browser smoke; Godot .NET build with zero warnings; native scene import, unchanged timestamps, independent placed components, gameplay, persistence, and rendered preview. Standards and spec reviews have no unresolved findings.

@@ -60,8 +60,10 @@ export function Chest({ position, persistenceKey }: { position: Vec3; persistenc
   });
   return <Group key="root" position={position} properties={{ wdl: { scope: local(store, persistenceKey) } }}>
     <Block key="base" size={[1.5, 0.7, 0.9]} position={[0, 0.35, 0]} material="wood" />
-    <Mesh key="treasure" position={[0, 0.85, 0]} material="gold" geometry={{ shape: "box", size: [1.5, 0.3, 0.9] }}
-      properties={{ wdl: { interact: action("interact"), label: "Collect ancient coin", bindings: { visible: not(read("collected")) } } }} />
+    <Group key="reward" position={[0, 0.85, 0]}
+      properties={{ wdl: { interact: action("interact"), label: "Collect ancient coin", bindings: { visible: not(read("collected")) } } }}>
+      <Mesh key="treasure" material="gold" geometry={{ shape: "box", size: [1.5, 0.3, 0.9] }} />
+    </Group>
   </Group>;
 }
 export function Room({ width = 16, depth = 16, floor = "stone" }: { width?: number; depth?: number; floor?: string }) {

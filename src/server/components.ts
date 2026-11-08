@@ -26,7 +26,7 @@ export async function listProjectComponents(manifest?: WorldManifest): Promise<C
   const paths = (await Promise.all(["worlds", "src/wdl", "src/dungeon"].map((directory) => files(resolve(root, directory))))).flat().sort();
   const definitions: ComponentDefinition[] = [];
   for (const path of paths) {
-    const file = relative(root, path);
+    const file = relative(root, path).replaceAll("\\", "/");
     const content = await readFile(path, "utf8");
     const source = ts.createSourceFile(file, content, ts.ScriptTarget.Latest, true, path.endsWith(".tsx") ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
     function add(name: string, node: ts.Node) {

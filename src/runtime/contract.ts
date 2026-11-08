@@ -132,6 +132,8 @@ export function compileBehavior(manifest: WorldManifest): BehaviorArtifact {
     let cursor: string | undefined = id;
     while (cursor && !authored.get(cursor)?.scope) cursor = byId.get(cursor)?.parentId;
     const { scope: _, ...resolved } = value;
+    if (!byId.get(id)?.geometry && (resolved.solid !== undefined || resolved.bindings?.solid !== undefined))
+      throw new Error("Solid bindings require mesh geometry: " + id);
     if (resolved.interact) {
       const store = resolveStore(resolved.interact.store, cursor);
       if (!Object.hasOwn(stores[store]!.actions, resolved.interact.action)) throw new Error("Unknown interaction action " + resolved.interact.action);
