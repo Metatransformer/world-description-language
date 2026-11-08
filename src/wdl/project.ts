@@ -11,6 +11,7 @@ import { WdlCompileError } from "./types.js";
 export async function compileProject(
   entryPath: string,
   registry?: VocabularyRegistry,
+  options?: { onDependencies?: (paths: string[]) => void },
 ): Promise<WorldManifest> {
   const entry = resolve(entryPath);
   const source = await readFile(entry, "utf8");
@@ -33,6 +34,7 @@ export async function compileProject(
   await mkdir(dirname(output), { recursive: true });
   const result = await build({
     write: false,
+    metafile: true,
     entryPoints: [entry],
     outfile: output,
     bundle: true,
@@ -49,6 +51,7 @@ export async function compileProject(
       "wdl/jsx-runtime": resolve("src/wdl/jsx-runtime.ts"),
     },
   });
+  options?.onDependencies?.(Object.keys(result.metafile!.inputs).map(path => resolve(path)));
   const bundled = Buffer.from(result.outputFiles![0]!.contents);
   const executable = bundled
     .toString("utf8")

@@ -12,7 +12,12 @@
     "test:e2e": "playwright test",
     "test:mcp": "WDL_MCP_INTEGRATION=1 vitest run tests/mcp.test.ts",
     "compile": "tsx scripts/compile.ts",
-    "mcp": "tsx src/server/mcp.ts"
+    "mcp": "tsx src/server/mcp.ts",
+    "game:build": "tsx scripts/build-game.ts",
+    "game:watch": "tsx scripts/build-game.ts --watch",
+    "game:three": "vite --config examples/three-runtime/vite.config.ts",
+    "game:three:build": "vite build --config examples/three-runtime/vite.config.ts",
+    "game:verify": "tsx scripts/verify-game.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.2",

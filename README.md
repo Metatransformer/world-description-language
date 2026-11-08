@@ -2,6 +2,8 @@
 
 Compose game worlds in TypeScript and JSX. Explore them in a Three.js browser workbench, then export portable scenes to Blender.
 
+**New: portable behavior and Godot .NET demo.** Build a connected JSX RPG world with doors, a lever-controlled gate, and persistent chests. Run it in Godot C# or the separate Three.js runtime. See the [Godot and portable-world guide](docs/GODOT.md) and [implementation spec](docs/specs/PORTABLE-WORLDS.md).
+
 WDL is an open-source experiment in **React for game worlds**: reusable components describe places, materials, geometry, procedural placement, and connections. A compiler turns that program into world data. The included Valenreach fantasy region combines a town, wilderness, interiors, and two procedural dungeons.
 
 ![Dungeon workbench with a clickable floorplan](docs/images/dungeon-workbench.png)
@@ -63,7 +65,7 @@ TypeScript + JSX + vocabularies + explicit seeds
 
 WDL uses real React elements and function composition. It does not run a DOM renderer or a game update loop. Stable keys give authored objects identities, and seeded algorithms generate repeatable placements. Compilation does not call an LLM. Gameplay is described through properties and contracts for a consuming game to implement.
 
-The [artifact contract](docs/ARTIFACT-CONTRACT.md) is independent of TypeScript and Three.js. Blender import is implemented; Godot, Unity, and Unreal adapters are future work.
+The [artifact contract](docs/ARTIFACT-CONTRACT.md) is independent of TypeScript and Three.js. Blender import and an initial Godot C# adapter are implemented; Unity and Unreal adapters are future work.
 
 ## Connect an AI agent through MCP
 

@@ -34,6 +34,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "worlds/**/*.tsx",
+    "examples/three-runtime/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", ".wdl"]

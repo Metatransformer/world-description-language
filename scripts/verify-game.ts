@@ -1,0 +1,68 @@
+import { readFile, stat, mkdir, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { execFileSync } from "node:child_process";
+import assert from "node:assert/strict";
+import { WorldRuntime, type Capability } from "../src/runtime/runtime.js";
+import type { BehaviorArtifact } from "../src/runtime/contract.js";
+
+const build = () => execFileSync(process.execPath, ["--import", "tsx", "scripts/build-game.ts"], { encoding: "utf8" });
+build();
+const contractPath = resolve("examples/godot-dotnet/generated/behavior.json");
+const before = (await stat(contractPath)).mtimeMs;
+assert.match(build(), /"changed":0/);
+assert.equal((await stat(contractPath)).mtimeMs, before, "Unchanged artifacts must retain mtimes");
+const contract: BehaviorArtifact = JSON.parse(await readFile(contractPath, "utf8"));
+const objects = Object.entries(contract.objects);
+const lever = objects.find(([, o]) => o.label === "Toggle dungeon gate")![0];
+const gate = objects.find(([, o]) => o.bindings?.solid !== undefined)![0];
+const chest = objects.find(([id, o]) => id.startsWith("dungeon/") && o.label === "Collect ancient coin")![0];
+let grants = 0, fail = true;
+let complete!: () => void;
+const handlers: Record<string, Capability> = {
+  "world.travel": () => {},
+  "inventory.grant": async () => {
+    grants++;
+    await new Promise<void>(resolve => { complete = resolve; });
+    if (fail) throw new Error("Inventory full");
+  },
+};
+const runtime = new WorldRuntime(contract, handlers);
+const trace: unknown[] = [runtime.binding(gate, "solid")];
+await runtime.interact(lever); trace.push(runtime.binding(gate, "solid"));
+const first = runtime.interact(chest);
+await runtime.interact(chest); trace.push(grants);
+assert.throws(() => runtime.snapshot(), /pending/); trace.push("pending-save-rejected");
+complete(); await first; trace.push(runtime.binding(chest, "visible"));
+fail = false;
+const retry = runtime.interact(chest); complete(); await retry;
+await runtime.interact(chest);
+trace.push(grants, runtime.binding(chest, "visible"));
+const snapshot = runtime.snapshot();
+const restored = new WorldRuntime(contract, handlers); restored.restore(snapshot);
+trace.push(restored.binding(chest, "visible"), new WorldRuntime(contract, handlers, "second").binding(chest, "visible"));
+const invalid = structuredClone(snapshot); invalid.stores.quest!.gateOpen = "wrong";
+assert.throws(() => restored.restore(invalid), /schema/); trace.push("schema-rejected");
+assert.deepEqual(trace, [true, false, 1, "pending-save-rejected", true, 2, false, false, true, "schema-rejected"]);
+const csharp = execFileSync("dotnet", ["run", "--project", "tests/dotnet/RuntimeChecks.csproj", "--", contractPath], { encoding: "utf8" });
+const line = csharp.split(/\r?\n/).find(line => line.startsWith("WDL_PARITY:"));
+assert.ok(line, csharp);
+assert.deepEqual(JSON.parse(line.slice("WDL_PARITY:".length)), { trace, snapshot });
+console.log("WDL_PARITY_OK: JS and C# agree on gate, async failure/retry, duplicate suppression, isolation, and persistence.");
+console.log("WDL_BUILD_OK: unchanged build preserves artifact mtimes.");
+const fixtureDir = resolve(".wdl/build-check");
+await mkdir(fixtureDir, { recursive: true });
+const fixtureEntry = resolve(fixtureDir, "entry.tsx"), fixturePart = resolve(fixtureDir, "part.tsx");
+const fixtureOutput = resolve(fixtureDir, "output");
+await writeFile(fixtureEntry, 'export { default } from "./part.js";');
+const source = (name: string) => 'import { World, Space, Mesh } from "../../src/wdl/index.js"; export default <World key="w" name="' + name + '"><Space key="s" name="S"><Mesh key="m" geometry={{shape:"box",size:[1,1,1]}} /></Space></World>;';
+await writeFile(fixturePart, source("Before"));
+const fixtureBuild = () => execFileSync(process.execPath, ["--import", "tsx", "scripts/build-game.ts", "--entry", fixtureEntry, "--out", fixtureOutput], { encoding: "utf8", stdio: "pipe" });
+fixtureBuild();
+await writeFile(fixturePart, source("After"));
+fixtureBuild();
+assert.equal(JSON.parse(await readFile(resolve(fixtureOutput, "manifest.json"), "utf8")).name, "After");
+const successful = await readFile(resolve(fixtureOutput, "manifest.json"), "utf8");
+await writeFile(fixturePart, "export default <broken");
+assert.throws(fixtureBuild);
+assert.equal(await readFile(resolve(fixtureOutput, "manifest.json"), "utf8"), successful);
+console.log("WDL_BUILD_OK: imported dependency changes rebuild; compile failures retain successful artifacts.");

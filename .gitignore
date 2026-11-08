@@ -5,3 +5,9 @@ coverage/
 test-results/
 playwright-report/
 *.tsbuildinfo
+.tmp/
+**/.godot/
+**/bin/
+**/obj/
+examples/godot-dotnet/generated/
+*.cs.uid
