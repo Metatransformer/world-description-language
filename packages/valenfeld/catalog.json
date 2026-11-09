@@ -1,0 +1,1075 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "name": "Admin",
+      "source": "scripts/gen/admin.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "AdmiraltyRuin",
+      "source": "scripts/gen/admiralty-ruin.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Agave",
+      "source": "scripts/gen/agave.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Airship",
+      "source": "scripts/gen/airship.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "AppleTree",
+      "source": "scripts/gen/apple-tree.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ArmorPiece",
+      "source": "scripts/gen/armor-piece.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Arrow",
+      "source": "scripts/gen/arrow.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Aurelith",
+      "source": "scripts/gen/aurelith.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Axe",
+      "source": "scripts/gen/axe.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "BannerCloth",
+      "source": "scripts/gen/banner-cloth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "BarrowHalls",
+      "source": "scripts/gen/barrow-halls.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "BarrowMouth",
+      "source": "scripts/gen/barrow-mouth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Birch",
+      "source": "scripts/gen/birch.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Bird",
+      "source": "scripts/gen/bird.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Boulder",
+      "source": "scripts/gen/boulder.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Bow",
+      "source": "scripts/gen/bow.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Bramble",
+      "source": "scripts/gen/bramble.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Butterfly",
+      "source": "scripts/gen/butterfly.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Cairn",
+      "source": "scripts/gen/cairn.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Campprop",
+      "source": "scripts/gen/campprop.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Campus",
+      "source": "scripts/gen/campus.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Cat",
+      "source": "scripts/gen/cat.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Chest",
+      "source": "scripts/gen/chest.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Chicken",
+      "source": "scripts/gen/chicken.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Clutter",
+      "source": "scripts/gen/clutter.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Coach",
+      "source": "scripts/gen/coach.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Cog",
+      "source": "scripts/gen/cog.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "CrowfootMine",
+      "source": "scripts/gen/crowfoot-mine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "CrowfootMouth",
+      "source": "scripts/gen/crowfoot-mouth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "CrownHall",
+      "source": "scripts/gen/crown-hall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "CurtainWall",
+      "source": "scripts/gen/curtain-wall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DatePalm",
+      "source": "scripts/gen/date-palm.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Deadtree",
+      "source": "scripts/gen/deadtree.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Deer",
+      "source": "scripts/gen/deer.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DenLair",
+      "source": "scripts/gen/den-lair.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DenMouth",
+      "source": "scripts/gen/den-mouth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Den",
+      "source": "scripts/gen/den.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DesertHouse",
+      "source": "scripts/gen/desert-house.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DomedHall",
+      "source": "scripts/gen/domed-hall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Door",
+      "source": "scripts/gen/door.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Dragon",
+      "source": "scripts/gen/dragon.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Dragonfly",
+      "source": "scripts/gen/dragonfly.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Driftwood",
+      "source": "scripts/gen/driftwood.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DrownedHalls",
+      "source": "scripts/gen/drowned-halls.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DrownedTemple",
+      "source": "scripts/gen/drowned-temple.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DryMill",
+      "source": "scripts/gen/dry-mill.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Dunegrass",
+      "source": "scripts/gen/dunegrass.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "DungeonKit",
+      "source": "scripts/gen/dungeon-kit.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "EqHumanoid",
+      "source": "scripts/gen/eq-humanoid.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ExciseHouse",
+      "source": "scripts/gen/excise-house.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FarmhouseRoom",
+      "source": "scripts/gen/farmhouse-room.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Farmstead",
+      "source": "scripts/gen/farmstead.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Fern",
+      "source": "scripts/gen/fern.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FerrowArch",
+      "source": "scripts/gen/ferrow-arch.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FightersGuild",
+      "source": "scripts/gen/fighters-guild.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FightersHall",
+      "source": "scripts/gen/fighters-hall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FightersRing",
+      "source": "scripts/gen/fighters-ring.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Fist",
+      "source": "scripts/gen/fist.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Flowerbed",
+      "source": "scripts/gen/flowerbed.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FootprintTaxHouse",
+      "source": "scripts/gen/footprint-tax-house.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FowlEyrie",
+      "source": "scripts/gen/fowl-eyrie.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Fox",
+      "source": "scripts/gen/fox.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "FrostfangMouth",
+      "source": "scripts/gen/frostfang-mouth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Frostfang",
+      "source": "scripts/gen/frostfang.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Furnish",
+      "source": "scripts/gen/furnish.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Gaol",
+      "source": "scripts/gen/gaol.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Glowcap",
+      "source": "scripts/gen/glowcap.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "GorseInn",
+      "source": "scripts/gen/gorse-inn.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Greataxe",
+      "source": "scripts/gen/greataxe.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "GrottoMouth",
+      "source": "scripts/gen/grotto-mouth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Grotto",
+      "source": "scripts/gen/grotto.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Groundpatch",
+      "source": "scripts/gen/groundpatch.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "GullShrine",
+      "source": "scripts/gen/gull-shrine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "GullspiteMoorings",
+      "source": "scripts/gen/gullspite-moorings.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HagHut",
+      "source": "scripts/gen/hag-hut.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HangingOakShrine",
+      "source": "scripts/gen/hanging-oak-shrine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Harbour",
+      "source": "scripts/gen/harbour.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Harbourhall",
+      "source": "scripts/gen/harbourhall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Harbourprop",
+      "source": "scripts/gen/harbourprop.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Hare",
+      "source": "scripts/gen/hare.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbArcade",
+      "source": "scripts/gen/hb-arcade.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbCastle",
+      "source": "scripts/gen/hb-castle.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbColiseum",
+      "source": "scripts/gen/hb-coliseum.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbCrowd",
+      "source": "scripts/gen/hb-crowd.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbGreen",
+      "source": "scripts/gen/hb-green.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbGuildhall",
+      "source": "scripts/gen/hb-guildhall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbOldquarter",
+      "source": "scripts/gen/hb-oldquarter.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbQuay",
+      "source": "scripts/gen/hb-quay.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbSpan",
+      "source": "scripts/gen/hb-span.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbStreet",
+      "source": "scripts/gen/hb-street.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbTerrace",
+      "source": "scripts/gen/hb-terrace.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HbWall",
+      "source": "scripts/gen/hb-wall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HeadlandLight",
+      "source": "scripts/gen/headland-light.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Heather",
+      "source": "scripts/gen/heather.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Hedgebush",
+      "source": "scripts/gen/hedgebush.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Helmet",
+      "source": "scripts/gen/helmet.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Herb",
+      "source": "scripts/gen/herb.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HermitCave",
+      "source": "scripts/gen/hermit-cave.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "HighkingCastle",
+      "source": "scripts/gen/highking-castle.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Horse",
+      "source": "scripts/gen/horse.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "House",
+      "source": "scripts/gen/house.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "InnHall",
+      "source": "scripts/gen/inn-hall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Inn",
+      "source": "scripts/gen/inn.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Interior",
+      "source": "scripts/gen/interior.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Jail",
+      "source": "scripts/gen/jail.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Juniper",
+      "source": "scripts/gen/juniper.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Kaldmoor",
+      "source": "scripts/gen/kaldmoor.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "KeepNorthRange",
+      "source": "scripts/gen/keep-north-range.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Kelp",
+      "source": "scripts/gen/kelp.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "LanternRock",
+      "source": "scripts/gen/lantern-rock.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "LensStand",
+      "source": "scripts/gen/lens-stand.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Lighthouse",
+      "source": "scripts/gen/lighthouse.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Log",
+      "source": "scripts/gen/log.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Longhall",
+      "source": "scripts/gen/longhall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Mace",
+      "source": "scripts/gen/mace.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MagesAnnex",
+      "source": "scripts/gen/mages-annex.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MagesGuild",
+      "source": "scripts/gen/mages-guild.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MagesHall",
+      "source": "scripts/gen/mages-hall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MarketStall",
+      "source": "scripts/gen/market-stall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MarshEdge",
+      "source": "scripts/gen/marsh-edge.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Masonry",
+      "source": "scripts/gen/masonry.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MastMarker",
+      "source": "scripts/gen/mast-marker.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Merged",
+      "source": "scripts/gen/merged.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Milestone",
+      "source": "scripts/gen/milestone.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MosswatchCastle",
+      "source": "scripts/gen/mosswatch-castle.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "MudWall",
+      "source": "scripts/gen/mud-wall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Oak",
+      "source": "scripts/gen/oak.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "OasisPool",
+      "source": "scripts/gen/oasis-pool.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "OldThalorDocks",
+      "source": "scripts/gen/old-thalor-docks.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Palisade",
+      "source": "scripts/gen/palisade.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Palm",
+      "source": "scripts/gen/palm.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "PieceLamppost",
+      "source": "scripts/gen/piece-lamppost.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "PieceMound",
+      "source": "scripts/gen/piece-mound.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "PieceRoof",
+      "source": "scripts/gen/piece-roof.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "PieceTripod",
+      "source": "scripts/gen/piece-tripod.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "PieceWindow",
+      "source": "scripts/gen/piece-window.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Pieces",
+      "source": "scripts/gen/pieces.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Pine",
+      "source": "scripts/gen/pine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Prop",
+      "source": "scripts/gen/prop.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Quad",
+      "source": "scripts/gen/quad.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Quarry",
+      "source": "scripts/gen/quarry.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ReedSteading",
+      "source": "scripts/gen/reed-steading.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Reeds",
+      "source": "scripts/gen/reeds.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "RidgeOverlook",
+      "source": "scripts/gen/ridge-overlook.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Rock",
+      "source": "scripts/gen/rock.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "RuinTower",
+      "source": "scripts/gen/ruin-tower.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SaltFarms",
+      "source": "scripts/gen/salt-farms.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SaltRoadFort",
+      "source": "scripts/gen/salt-road-fort.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SandtombMouth",
+      "source": "scripts/gen/sandtomb-mouth.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Sandtomb",
+      "source": "scripts/gen/sandtomb.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Scorpion",
+      "source": "scripts/gen/scorpion.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Scrub",
+      "source": "scripts/gen/scrub.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SeaFort",
+      "source": "scripts/gen/sea-fort.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SentinelHead",
+      "source": "scripts/gen/sentinel-head.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Serpent",
+      "source": "scripts/gen/serpent.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Settlement",
+      "source": "scripts/gen/settlement.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Shed",
+      "source": "scripts/gen/shed.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Sheep",
+      "source": "scripts/gen/sheep.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ShepherdShelter",
+      "source": "scripts/gen/shepherd-shelter.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Shield",
+      "source": "scripts/gen/shield.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Shrine",
+      "source": "scripts/gen/shrine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SignBoard",
+      "source": "scripts/gen/sign-board.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Signpost",
+      "source": "scripts/gen/signpost.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SilentClearing",
+      "source": "scripts/gen/silent-clearing.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SkyIsland",
+      "source": "scripts/gen/sky-island.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SmithyGear",
+      "source": "scripts/gen/smithy-gear.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Smithy",
+      "source": "scripts/gen/smithy.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SmugglersGibbet",
+      "source": "scripts/gen/smugglers-gibbet.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Snowpine",
+      "source": "scripts/gen/snowpine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Songbird",
+      "source": "scripts/gen/songbird.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Spider",
+      "source": "scripts/gen/spider.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Spire",
+      "source": "scripts/gen/spire.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Squirrel",
+      "source": "scripts/gen/squirrel.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Staff",
+      "source": "scripts/gen/staff.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "StandingStone",
+      "source": "scripts/gen/standing-stone.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "StoreSign",
+      "source": "scripts/gen/store-sign.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "StormBeacon",
+      "source": "scripts/gen/storm-beacon.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SultanaPalace",
+      "source": "scripts/gen/sultana-palace.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "SunscarProp",
+      "source": "scripts/gen/sunscar-prop.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Sword",
+      "source": "scripts/gen/sword.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Tavern",
+      "source": "scripts/gen/tavern.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Tent",
+      "source": "scripts/gen/tent.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ThalorArsenal",
+      "source": "scripts/gen/thalor-arsenal.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TideCrab",
+      "source": "scripts/gen/tide-crab.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TideSaint",
+      "source": "scripts/gen/tide-saint.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TollHut",
+      "source": "scripts/gen/toll-hut.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Tower",
+      "source": "scripts/gen/tower.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TownGate",
+      "source": "scripts/gen/town-gate.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TownTemple",
+      "source": "scripts/gen/town-temple.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TownWall",
+      "source": "scripts/gen/town-wall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TrainingDummy",
+      "source": "scripts/gen/training-dummy.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "TravelTower",
+      "source": "scripts/gen/travel-tower.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Troll",
+      "source": "scripts/gen/troll.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "UnpaidShip",
+      "source": "scripts/gen/unpaid-ship.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "VaelCascade",
+      "source": "scripts/gen/vael-cascade.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ValenfeldKeepFloors",
+      "source": "scripts/gen/valenfeld-keep-floors.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ValenfeldKeepHall",
+      "source": "scripts/gen/valenfeld-keep-hall.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "ValenfeldKeep",
+      "source": "scripts/gen/valenfeld-keep.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "VineRow",
+      "source": "scripts/gen/vine-row.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WallCasemate",
+      "source": "scripts/gen/wall-casemate.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WallTower",
+      "source": "scripts/gen/wall-tower.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Warhammer",
+      "source": "scripts/gen/warhammer.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Wayshrine",
+      "source": "scripts/gen/wayshrine.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Well",
+      "source": "scripts/gen/well.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WheelbrookCrossing",
+      "source": "scripts/gen/wheelbrook-crossing.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WheelbrookMill",
+      "source": "scripts/gen/wheelbrook-mill.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WheelbrookWheel",
+      "source": "scripts/gen/wheelbrook-wheel.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Wildflowers",
+      "source": "scripts/gen/wildflowers.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Windmill",
+      "source": "scripts/gen/windmill.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WitnessCove",
+      "source": "scripts/gen/witness-cove.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Wolf",
+      "source": "scripts/gen/wolf.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "Wraith",
+      "source": "scripts/gen/wraith.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WreckHull",
+      "source": "scripts/gen/wreck-hull.js",
+      "module": "./src/library.tsx"
+    },
+    {
+      "name": "WreckersKirkyard",
+      "source": "scripts/gen/wreckers-kirkyard.js",
+      "module": "./src/library.tsx"
+    }
+  ]
+}

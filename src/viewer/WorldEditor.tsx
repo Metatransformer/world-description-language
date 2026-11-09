@@ -117,7 +117,7 @@ export function WorldEditor() {
         : objects
             .filter(
               (object) =>
-                object.name ||
+                !object.geometry || object.name ||
                 [
                   "region",
                   "district",
@@ -361,6 +361,7 @@ export function WorldEditor() {
               <button
                 key={object.id}
                 className={selectedId === object.id ? "active" : ""}
+                style={{ paddingLeft: 12 + Math.min(object.id.split("/").length - 2, 5) * 12 }}
                 onClick={() => focus(object)}
               >
                 <span className="branch">{object.parentId ? "└" : "◆"}</span>

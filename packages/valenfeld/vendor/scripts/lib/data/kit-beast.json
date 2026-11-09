@@ -1,0 +1,32 @@
+{
+  "sides": {
+    "near": 10,
+    "mid": 7,
+    "far": 5
+  },
+  "lod": {
+    "near": 1,
+    "mid": 3
+  },
+  "smooth": {
+    "k": 3,
+    "upToLod": 2
+  },
+  "rough": 0.85,
+  "limb": {
+    "taper": 0.7,
+    "capStart": 0.6,
+    "capEnd": 1.2
+  },
+  "chainCap": 0.02,
+  "blob": {
+    "slices": 7,
+    "minRadius": 0.12,
+    "power": 0.6,
+    "span": [
+      0.06,
+      0.88
+    ],
+    "cap": 0.05
+  }
+}

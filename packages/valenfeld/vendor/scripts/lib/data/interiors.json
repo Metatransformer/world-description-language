@@ -1,0 +1,1029 @@
+{
+  "materials": {
+    "plank": {
+      "tex": "cdn/texture-worn-oak-floorboards-warm-honey.png",
+      "tint": "oklch(0.95 0.02 70)",
+      "rep": 1.6
+    },
+    "flag": {
+      "tex": "cdn/texture-flagstone-floor-worn.png",
+      "tint": "oklch(0.93 0.01 80)",
+      "rep": 2.0
+    },
+    "ashlar": {
+      "tex": "cdn/texture-ashlar-cream-limestone-two-courses-big-dressed-blocks-thin-pale-mortar-subtle-weathering.png",
+      "tint": "oklch(0.97 0.012 85)",
+      "rep": 2.5
+    },
+    "plaster": {
+      "tex": "cdn/texture-limewash-plaster.png",
+      "tint": "oklch(0.96 0.025 80)",
+      "rep": 2.5
+    },
+    "fieldstone": {
+      "tex": "cdn/texture-fieldstone-wall-mossy.png",
+      "tint": "oklch(0.92 0.01 80)",
+      "rep": 2.0
+    },
+    "panel": {
+      "tex": "cdn/texture-dark-oak-planks-weathered.png",
+      "tint": "oklch(0.93 0.02 70)",
+      "rep": 1.5
+    },
+    "beams": {
+      "tex": "cdn/texture-dark-oak-planks-weathered.png",
+      "tint": "oklch(0.9 0.02 65)",
+      "rep": 1.5
+    }
+  },
+  "pieces": {
+    "bed": {
+      "w": 1.15,
+      "d": 2.05,
+      "h": 0.62
+    },
+    "bunk": {
+      "w": 1.0,
+      "d": 2.0,
+      "h": 1.7
+    },
+    "table": {
+      "w": 1.5,
+      "d": 0.9,
+      "h": 0.76
+    },
+    "round-table": {
+      "w": 1.0,
+      "d": 1.0,
+      "h": 0.76
+    },
+    "long-table": {
+      "w": 3.2,
+      "d": 1.0,
+      "h": 0.78
+    },
+    "desk": {
+      "w": 1.3,
+      "d": 0.7,
+      "h": 0.78
+    },
+    "chair": {
+      "w": 0.5,
+      "d": 0.5,
+      "h": 0.95
+    },
+    "bench": {
+      "w": 1.6,
+      "d": 0.42,
+      "h": 0.46
+    },
+    "high-seat": {
+      "w": 1.0,
+      "d": 0.8,
+      "h": 1.7
+    },
+    "hearth": {
+      "w": 1.9,
+      "d": 0.85,
+      "h": 1.4
+    },
+    "stove": {
+      "w": 1.4,
+      "d": 0.85,
+      "h": 1.0
+    },
+    "forge": {
+      "w": 1.8,
+      "d": 1.2,
+      "h": 0.9
+    },
+    "anvil": {
+      "w": 0.8,
+      "d": 0.6,
+      "h": 0.85
+    },
+    "workbench": {
+      "w": 1.8,
+      "d": 0.8,
+      "h": 0.9
+    },
+    "quench-trough": {
+      "w": 1.3,
+      "d": 0.55,
+      "h": 0.6
+    },
+    "grindstone": {
+      "w": 0.9,
+      "d": 0.6,
+      "h": 1.0
+    },
+    "armor-stand": {
+      "w": 0.7,
+      "d": 0.5,
+      "h": 1.8
+    },
+    "bar-stock": {
+      "w": 1.2,
+      "d": 0.5,
+      "h": 1.1
+    },
+    "shelves": {
+      "w": 1.3,
+      "d": 0.38,
+      "h": 1.95
+    },
+    "bookcase": {
+      "w": 1.2,
+      "d": 0.42,
+      "h": 2.15
+    },
+    "cupboard": {
+      "w": 1.2,
+      "d": 0.5,
+      "h": 1.9
+    },
+    "wardrobe": {
+      "w": 1.1,
+      "d": 0.62,
+      "h": 2.0
+    },
+    "chest": {
+      "w": 0.95,
+      "d": 0.55,
+      "h": 0.6
+    },
+    "counter": {
+      "w": 2.6,
+      "d": 0.7,
+      "h": 1.05
+    },
+    "bar": {
+      "w": 3.0,
+      "d": 0.75,
+      "h": 1.08
+    },
+    "cask-rack": {
+      "w": 1.9,
+      "d": 0.85,
+      "h": 1.6
+    },
+    "barrels": {
+      "w": 1.5,
+      "d": 0.75,
+      "h": 0.9
+    },
+    "crates": {
+      "w": 1.4,
+      "d": 0.8,
+      "h": 1.2
+    },
+    "sacks": {
+      "w": 1.2,
+      "d": 0.6,
+      "h": 0.6
+    },
+    "weapon-rack": {
+      "w": 1.4,
+      "d": 0.4,
+      "h": 1.8
+    },
+    "rug": {
+      "w": 2.3,
+      "d": 1.6,
+      "h": 0.02,
+      "walk": true
+    },
+    "banner": {
+      "w": 1.0,
+      "d": 0.1,
+      "h": 2.6,
+      "walk": true
+    },
+    "candle-stand": {
+      "w": 0.45,
+      "d": 0.45,
+      "h": 1.5
+    }
+  },
+  "rooms": {
+    "hearth-room": {
+      "size": {
+        "w": [
+          3.5,
+          12
+        ],
+        "d": [
+          3,
+          9
+        ]
+      },
+      "floor": "plank",
+      "wall": "plaster",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.82 0.13 60)",
+        "intensity": 2.6,
+        "distance": 10,
+        "at": "hearth"
+      },
+      "furniture": [
+        {
+          "piece": "hearth",
+          "place": "wall-back"
+        },
+        {
+          "piece": "rug",
+          "place": "centre"
+        },
+        {
+          "piece": "table",
+          "place": "centre",
+          "chairs": 4
+        },
+        {
+          "piece": "shelves",
+          "place": "wall-side"
+        },
+        {
+          "piece": "chest",
+          "place": "corner"
+        },
+        {
+          "piece": "bench",
+          "place": "wall"
+        },
+        {
+          "piece": "barrels",
+          "place": "by-door"
+        }
+      ]
+    },
+    "bedroom": {
+      "size": {
+        "w": [
+          3,
+          8
+        ],
+        "d": [
+          2.6,
+          6
+        ]
+      },
+      "floor": "plank",
+      "wall": "plaster",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.8 0.12 65)",
+        "intensity": 1.6,
+        "distance": 7,
+        "at": "candle-stand"
+      },
+      "furniture": [
+        {
+          "piece": "bed",
+          "place": "wall-back"
+        },
+        {
+          "piece": "wardrobe",
+          "place": "wall-side"
+        },
+        {
+          "piece": "chest",
+          "place": "wall"
+        },
+        {
+          "piece": "rug",
+          "place": "centre"
+        },
+        {
+          "piece": "candle-stand",
+          "place": "corner"
+        },
+        {
+          "piece": "chair",
+          "place": "corner"
+        }
+      ]
+    },
+    "kitchen": {
+      "size": {
+        "w": [
+          3,
+          9
+        ],
+        "d": [
+          2.5,
+          6
+        ]
+      },
+      "floor": "flag",
+      "wall": "plaster",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.8 0.14 55)",
+        "intensity": 2.0,
+        "distance": 8,
+        "at": "stove"
+      },
+      "furniture": [
+        {
+          "piece": "stove",
+          "place": "wall-back"
+        },
+        {
+          "piece": "table",
+          "place": "centre",
+          "chairs": 2
+        },
+        {
+          "piece": "cupboard",
+          "place": "wall"
+        },
+        {
+          "piece": "shelves",
+          "place": "wall"
+        },
+        {
+          "piece": "barrels",
+          "place": "corner"
+        },
+        {
+          "piece": "sacks",
+          "place": "corner"
+        }
+      ]
+    },
+    "shop-front": {
+      "size": {
+        "w": [
+          4,
+          12
+        ],
+        "d": [
+          3,
+          7
+        ]
+      },
+      "floor": "plank",
+      "wall": "plaster",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.84 0.1 75)",
+        "intensity": 2.4,
+        "distance": 10,
+        "at": "counter"
+      },
+      "furniture": [
+        {
+          "piece": "counter",
+          "place": "across"
+        },
+        {
+          "piece": "shelves",
+          "place": "wall-back",
+          "goods": true,
+          "n": 2
+        },
+        {
+          "piece": "shelves",
+          "place": "wall-side",
+          "goods": true,
+          "n": 2
+        },
+        {
+          "piece": "barrels",
+          "place": "by-door"
+        },
+        {
+          "piece": "crates",
+          "place": "corner"
+        },
+        {
+          "piece": "rug",
+          "place": "by-door"
+        }
+      ]
+    },
+    "tavern-hall": {
+      "size": {
+        "w": [
+          6,
+          16
+        ],
+        "d": [
+          4,
+          10
+        ]
+      },
+      "floor": "plank",
+      "wall": "plaster",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.8 0.14 58)",
+        "intensity": 3.2,
+        "distance": 14,
+        "at": "hearth"
+      },
+      "furniture": [
+        {
+          "piece": "bar",
+          "place": "wall-back"
+        },
+        {
+          "piece": "cask-rack",
+          "place": "wall-back"
+        },
+        {
+          "piece": "hearth",
+          "place": "wall-side"
+        },
+        {
+          "piece": "round-table",
+          "place": "centre",
+          "chairs": 3,
+          "n": 3
+        },
+        {
+          "piece": "long-table",
+          "place": "wall",
+          "chairs": 0
+        },
+        {
+          "piece": "barrels",
+          "place": "corner"
+        },
+        {
+          "piece": "banner",
+          "place": "wall"
+        }
+      ]
+    },
+    "workshop": {
+      "size": {
+        "w": [
+          4,
+          12
+        ],
+        "d": [
+          3,
+          8
+        ]
+      },
+      "floor": "flag",
+      "wall": "fieldstone",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.75 0.17 45)",
+        "intensity": 3.0,
+        "distance": 10,
+        "at": "forge"
+      },
+      "furniture": [
+        {
+          "piece": "forge",
+          "place": "wall-back"
+        },
+        {
+          "piece": "anvil",
+          "place": "centre"
+        },
+        {
+          "piece": "quench-trough",
+          "place": "wall-back"
+        },
+        {
+          "piece": "workbench",
+          "place": "wall-side"
+        },
+        {
+          "piece": "grindstone",
+          "place": "corner"
+        },
+        {
+          "piece": "weapon-rack",
+          "place": "wall"
+        },
+        {
+          "piece": "armor-stand",
+          "place": "wall-side"
+        },
+        {
+          "piece": "bar-stock",
+          "place": "wall"
+        },
+        {
+          "piece": "barrels",
+          "place": "corner"
+        },
+        {
+          "piece": "crates",
+          "place": "corner"
+        }
+      ]
+    },
+    "study": {
+      "size": {
+        "w": [
+          3,
+          9
+        ],
+        "d": [
+          2.6,
+          7
+        ]
+      },
+      "floor": "plank",
+      "wall": "panel",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.82 0.11 70)",
+        "intensity": 1.8,
+        "distance": 8,
+        "at": "desk"
+      },
+      "furniture": [
+        {
+          "piece": "bookcase",
+          "place": "wall-back",
+          "n": 2
+        },
+        {
+          "piece": "bookcase",
+          "place": "wall-side",
+          "n": 2
+        },
+        {
+          "piece": "desk",
+          "place": "centre"
+        },
+        {
+          "piece": "rug",
+          "place": "centre"
+        },
+        {
+          "piece": "candle-stand",
+          "place": "corner"
+        },
+        {
+          "piece": "chest",
+          "place": "corner"
+        }
+      ]
+    },
+    "hay-barn": {
+      "size": {
+        "w": [
+          5,
+          14
+        ],
+        "d": [
+          5,
+          14
+        ]
+      },
+      "floor": "plank",
+      "wall": "panel",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.8 0.11 70)",
+        "intensity": 1.6,
+        "distance": 10,
+        "at": "centre"
+      },
+      "furniture": [
+        {
+          "piece": "sacks",
+          "place": "wall-back",
+          "n": 2
+        },
+        {
+          "piece": "crates",
+          "place": "corner",
+          "n": 2
+        },
+        {
+          "piece": "barrels",
+          "place": "corner"
+        },
+        {
+          "piece": "quench-trough",
+          "place": "wall-side",
+          "n": 2
+        },
+        {
+          "piece": "weapon-rack",
+          "place": "wall"
+        },
+        {
+          "piece": "workbench",
+          "place": "wall-side"
+        },
+        {
+          "piece": "shelves",
+          "place": "wall"
+        }
+      ]
+    },
+    "storeroom": {
+      "size": {
+        "w": [
+          2.5,
+          10
+        ],
+        "d": [
+          2,
+          6
+        ]
+      },
+      "floor": "flag",
+      "wall": "fieldstone",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.78 0.1 65)",
+        "intensity": 1.0,
+        "distance": 6,
+        "at": "centre"
+      },
+      "furniture": [
+        {
+          "piece": "cask-rack",
+          "place": "wall-back"
+        },
+        {
+          "piece": "barrels",
+          "place": "corner",
+          "n": 2
+        },
+        {
+          "piece": "crates",
+          "place": "corner",
+          "n": 2
+        },
+        {
+          "piece": "sacks",
+          "place": "wall"
+        },
+        {
+          "piece": "shelves",
+          "place": "wall"
+        }
+      ]
+    },
+    "guard-room": {
+      "size": {
+        "w": [
+          4,
+          14
+        ],
+        "d": [
+          3,
+          9
+        ]
+      },
+      "floor": "flag",
+      "wall": "ashlar",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.8 0.13 60)",
+        "intensity": 2.4,
+        "distance": 10,
+        "at": "centre"
+      },
+      "furniture": [
+        {
+          "piece": "weapon-rack",
+          "place": "wall-back",
+          "n": 2
+        },
+        {
+          "piece": "long-table",
+          "place": "centre",
+          "chairs": 0
+        },
+        {
+          "piece": "bunk",
+          "place": "wall-side",
+          "n": 2
+        },
+        {
+          "piece": "chest",
+          "place": "corner",
+          "n": 2
+        },
+        {
+          "piece": "banner",
+          "place": "wall"
+        }
+      ]
+    },
+    "nave": {
+      "size": {
+        "w": [
+          6,
+          14
+        ],
+        "d": [
+          8,
+          18
+        ]
+      },
+      "floor": "flag",
+      "wall": "plaster",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.84 0.1 75)",
+        "intensity": 2.8,
+        "distance": 16,
+        "at": "centre"
+      },
+      "furniture": [
+        {
+          "piece": "table",
+          "place": "wall-back"
+        },
+        {
+          "piece": "candle-stand",
+          "place": "wall-back",
+          "n": 2
+        },
+        {
+          "piece": "rug",
+          "place": "centre"
+        },
+        {
+          "piece": "bench",
+          "place": "centre",
+          "n": 6
+        },
+        {
+          "piece": "banner",
+          "place": "wall",
+          "n": 2
+        },
+        {
+          "piece": "candle-stand",
+          "place": "corner",
+          "n": 2
+        },
+        {
+          "piece": "bookcase",
+          "place": "wall-side"
+        }
+      ]
+    },
+    "noble-hall": {
+      "size": {
+        "w": [
+          6,
+          18
+        ],
+        "d": [
+          5,
+          12
+        ]
+      },
+      "floor": "ashlar",
+      "wall": "ashlar",
+      "ceiling": "beams",
+      "light": {
+        "color": "oklch(0.83 0.12 70)",
+        "intensity": 3.4,
+        "distance": 14,
+        "at": "hearth"
+      },
+      "furniture": [
+        {
+          "piece": "hearth",
+          "place": "wall-back"
+        },
+        {
+          "piece": "rug",
+          "place": "centre"
+        },
+        {
+          "piece": "long-table",
+          "place": "centre",
+          "chairs": 6
+        },
+        {
+          "piece": "high-seat",
+          "place": "wall-side"
+        },
+        {
+          "piece": "banner",
+          "place": "wall",
+          "n": 2
+        },
+        {
+          "piece": "bookcase",
+          "place": "wall"
+        },
+        {
+          "piece": "candle-stand",
+          "place": "corner",
+          "n": 2
+        }
+      ]
+    }
+  },
+  "recipes": {
+    "house-small": {
+      "name": "a house",
+      "ground": [
+        "hearth-room"
+      ],
+      "upper": [],
+      "w": 7,
+      "d": 6,
+      "h": 3.0,
+      "pick": {
+        "maxArea": 55
+      }
+    },
+    "house-two-storey": {
+      "name": "a house",
+      "ground": [
+        "hearth-room",
+        "kitchen"
+      ],
+      "upper": [
+        "bedroom"
+      ],
+      "w": 8,
+      "d": 9,
+      "h": 3.0,
+      "pick": {
+        "minArea": 55
+      }
+    },
+    "shop": {
+      "name": "the shop",
+      "ground": [
+        "shop-front",
+        "storeroom"
+      ],
+      "upper": [],
+      "w": 8,
+      "d": 8.5,
+      "h": 3.2,
+      "pick": {
+        "trades": [
+          "general",
+          "apothecary",
+          "pawnshop",
+          "fletcher",
+          "bookseller",
+          "mage-supply",
+          "tailor",
+          "grocer",
+          "jeweller"
+        ]
+      }
+    },
+    "tavern": {
+      "name": "the tavern",
+      "ground": [
+        "tavern-hall",
+        "kitchen"
+      ],
+      "upper": [
+        "bedroom",
+        "bedroom"
+      ],
+      "w": 11,
+      "d": 11,
+      "h": 3.6,
+      "pick": {
+        "trades": [
+          "inn",
+          "tavern"
+        ]
+      }
+    },
+    "smithy": {
+      "name": "the smithy",
+      "ground": [
+        "workshop",
+        "storeroom"
+      ],
+      "upper": [],
+      "w": 9,
+      "d": 8.5,
+      "h": 3.4,
+      "pick": {
+        "trades": [
+          "smith",
+          "armorer",
+          "smithy",
+          "workshop",
+          "carpenter"
+        ]
+      }
+    },
+    "noble-house": {
+      "name": "the manor",
+      "ground": [
+        "noble-hall",
+        "study"
+      ],
+      "upper": [
+        "bedroom",
+        "study"
+      ],
+      "w": 12,
+      "d": 12,
+      "h": 4.0,
+      "pick": {
+        "trades": [
+          "noble",
+          "manor"
+        ],
+        "minArea": 130
+      }
+    },
+    "chapel": {
+      "name": "the chapel",
+      "ground": [
+        "nave"
+      ],
+      "upper": [],
+      "w": 10,
+      "d": 16,
+      "h": 5.0,
+      "pick": {
+        "trades": [
+          "temple",
+          "chapel",
+          "shrine"
+        ]
+      }
+    },
+    "barn": {
+      "name": "the barn",
+      "ground": [
+        "hay-barn"
+      ],
+      "upper": [],
+      "w": 9,
+      "d": 9,
+      "h": 4.2,
+      "pick": {
+        "trades": [
+          "barn",
+          "stable",
+          "stables"
+        ]
+      }
+    },
+    "barracks": {
+      "name": "the barracks",
+      "ground": [
+        "guard-room",
+        "storeroom"
+      ],
+      "upper": [
+        "guard-room"
+      ],
+      "w": 10,
+      "d": 11,
+      "h": 3.2,
+      "pick": {
+        "trades": [
+          "guard",
+          "barracks",
+          "watch"
+        ]
+      }
+    }
+  },
+  "lightScale": 10,
+  "upper": {
+    "h": 2.7,
+    "slab": 0.22
+  },
+  "stair": {
+    "width": 1.0,
+    "rise": 0.19,
+    "tread": 0.28,
+    "minTread": 0.22,
+    "landing": 0.9
+  },
+  "walls": {
+    "t": 0.3,
+    "door": [
+      1.2,
+      2.3
+    ],
+    "inner": [
+      1.1,
+      2.2
+    ]
+  },
+  "window": {
+    "w": 0.9,
+    "h": 1.1,
+    "sill": 1.0,
+    "every": 3.2,
+    "glass": "oklch(0.86 0.06 85)"
+  }
+}

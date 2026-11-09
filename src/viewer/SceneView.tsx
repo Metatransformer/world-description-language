@@ -41,6 +41,7 @@ export function SceneView({
   const state = useRef<
     | {
         camera: THREE.PerspectiveCamera;
+        scene: THREE.Scene;
         renderer: THREE.WebGLRenderer;
         controls: OrbitControls;
         objects: Map<string, THREE.Mesh>;
@@ -54,7 +55,7 @@ export function SceneView({
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#172431");
     const dungeon = manifest.spaces.find((space) => space.id === spaceId)?.properties.kind === "dungeon";
-    scene.fog = new THREE.FogExp2(dungeon ? "#182129" : "#526273", dungeon ? 0.006 : 0.0032);
+    scene.fog = new THREE.FogExp2(dungeon ? "#182129" : "#526273", dungeon ? (dungeonCutaway ? 0 : 0.006) : 0.0032);
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       preserveDrawingBuffer: true,
@@ -106,6 +107,7 @@ export function SceneView({
     grid.position.y = -0.15;
     if (!dungeon) scene.add(grid);
     state.current = {
+      scene,
       camera,
       renderer,
       controls,
@@ -238,7 +240,11 @@ export function SceneView({
     };
   }, [manifest, spaceId]);
   useEffect(() => {
-    if (state.current) setDungeonCutaway(state.current.objects, dungeonCutaway);
+    if (state.current) {
+      setDungeonCutaway(state.current.objects, dungeonCutaway);
+      const dungeon = manifest.spaces.find(space => space.id === spaceId)?.properties.kind === "dungeon";
+      if (dungeon && state.current.scene.fog instanceof THREE.FogExp2) state.current.scene.fog.density = dungeonCutaway ? 0 : 0.006;
+    }
   }, [dungeonCutaway]);
   useEffect(() => {
     if (state.current) setSelected(state.current.objects, selectedId);

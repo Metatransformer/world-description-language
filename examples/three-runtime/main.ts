@@ -26,12 +26,12 @@ let objects = new Map<string, THREE.Object3D>();
 let bounds = new Map<string, THREE.Box3>();
 let elapsed = performance.now();
 let target: string | undefined;
-const contract: BehaviorArtifact = await (await fetch("/behavior.json")).json();
-const manifest: WorldManifest = await (await fetch("/manifest.json")).json();
+const contract: BehaviorArtifact = await (await fetch("./behavior.json")).json();
+const manifest: WorldManifest = await (await fetch("./manifest.json")).json();
 document.querySelector("h1")!.textContent = manifest.name;
 document.title = manifest.name + " · Generative World Studio";
 const saveKey = "wdl-" + manifest.name;
-const index: { spaces: Array<{ id: string; file: string; nodes: string[] }> } = await (await fetch("/index.json")).json();
+const index: { spaces: Array<{ id: string; file: string; nodes: string[] }> } = await (await fetch("./index.json")).json();
 const runtime = new WorldRuntime(contract, {
   "world.travel": async args => { await travel(String(args.space), new THREE.Vector3(Number(args.x), Number(args.y) - 1, Number(args.z))); },
   "inventory.grant": args => { coins++; status.textContent = "Collected " + args.item; },
@@ -60,7 +60,7 @@ runtime.onChange = refresh;
 async function travel(id: string, arrival: THREE.Vector3) {
   const entry = index.spaces.find(s => s.id === id);
   if (!entry) throw new Error("Unknown space: " + id);
-  const loaded = await loader.loadAsync("/" + entry.file);
+  const loaded = await loader.loadAsync("./" + entry.file);
   if (space) {
     scene.remove(space);
     space.traverse(o => { if (o instanceof THREE.Mesh) {

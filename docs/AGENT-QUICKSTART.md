@@ -5,11 +5,13 @@ Start at the repository root. Read `package.json` for available commands. Instal
 ## Run or extend Valenfeld
 
 1. Run `npm run game:spawn:web`. Completion: the served page renders the town; use its Demo tour picker to visit inn, cottage, and workshop. Use the HTTP URL printed by the launcher.
-2. Run `npm run game:spawn:explorer` in a second terminal. Completion: Explorer lists four spaces and lets you inspect placed components and their source. Stop an existing Explorer on port 3000 before starting another.
+2. Run `npm run game:spawn:explorer` in a second terminal. Completion: Explorer lists five spaces and lets you inspect placed components and their source. Stop an existing Explorer on port 3000 before starting another.
 3. Read [the example map](VALENFELD.md). Edit `worlds/spawn-demo.tsx` for composition, `worlds/spawn/components.tsx` for imported architecture, or `worlds/spawn/interiors.tsx` for new interiors. Keep explicit JSX keys and persistent store keys stable across ordinary edits.
 4. Run `npm run game:spawn:build` and reload the playable page. Completion: `npm run typecheck` and `npx vitest run tests/spawn.test.tsx` pass; the changed component renders and its interactions work. Explorer recompiles its source independently.
 
 ## Integrate a Godot game
+
+For reusable kits, installed npm components, or publishing a library, read [COMPONENT-LIBRARIES.md](COMPONENT-LIBRARIES.md). Completion: the library appears in Explorer, a world imports it by package name, and its packed tarball compiles in a separate consumer.
 
 Read [INTEGRATION.md](INTEGRATION.md) before copying the adapter. Inspect the target project's Godot/.NET versions, player controller, scene ownership, inventory, and save system. Reuse those systems through capabilities.
 

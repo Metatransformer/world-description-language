@@ -1,0 +1,26 @@
+{
+  "name": "@generative-world-studio/core",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Generative World Studio core build-time JSX library",
+  "exports": {
+    ".": "./src/index.ts",
+    "./jsx-runtime": "./src/jsx-runtime.ts",
+    "./jsx-dev-runtime": "./src/jsx-dev-runtime.ts"
+  },
+  "files": [
+    "src",
+    "vendor",
+    "reference",
+    "provenance.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "tex": {
+    "WOOLG": "cdn/texture-grey-wool-blanket.png",
+    "WOOLR": "cdn/texture-rust-red-wool-cloth.png",
+    "LEATH": "cdn/texture-worn-brown-leather.png",
+    "FUR": "cdn/texture-brown-boar-fur-hide.png",
+    "SAND": "cdn/texture-packed-training-yard-sand.png",
+    "GRIT": "cdn/texture-weathered-sandstone-blocks.png"
+  },
+  "col": {
+    "RED": "#a8452e",
+    "IRON": "oklch(0.36 0.01 250)",
+    "STEEL": "oklch(0.72 0.01 250)",
+    "LINEN": "oklch(0.86 0.03 85)",
+    "PAPER": "oklch(0.88 0.04 88)",
+    "GOLD": "#c9a45a"
+  },
+  "minBox": 0.02,
+  "bedding": {
+    "blanketTint": "oklch(0.95 0.01 80)"
+  },
+  "bunk": {
+    "hw": 0.5,
+    "hl": 1.05
+  },
+  "bed": {
+    "hw": 0.75,
+    "hl": 1.08
+  },
+  "chest": {
+    "light": {
+      "hw": 0.4,
+      "hd": 0.23,
+      "h": 0.42
+    },
+    "heavy": {
+      "hw": 0.42,
+      "hd": 0.26,
+      "h": 0.5
+    }
+  },
+  "table": {
+    "L": 4.4,
+    "W": 0.95,
+    "H": 0.78
+  },
+  "bench": {
+    "L": 4.2,
+    "H": 0.45
+  },
+  "chair": {
+    "plain": {
+      "hw": 0.24,
+      "bh": 1.05
+    },
+    "grand": {
+      "hw": 0.36,
+      "bh": 1.75
+    }
+  },
+  "shield": {
+    "sides": 12,
+    "t": 0.04
+  }
+}

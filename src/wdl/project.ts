@@ -7,6 +7,7 @@ import type { ReactElement } from "react";
 import { compileWorld } from "./compiler.js";
 import type { VocabularyRegistry, WorldManifest } from "./types.js";
 import { WdlCompileError } from "./types.js";
+import { componentLibraries, packageEntry } from "./libraries.js";
 
 export async function compileProject(
   entryPath: string,
@@ -47,8 +48,12 @@ export async function compileProject(
     jsxImportSource: "wdl",
     sourcemap: "inline",
     alias: {
-      "wdl/jsx-dev-runtime": resolve("src/wdl/jsx-dev-runtime.ts"),
-      "wdl/jsx-runtime": resolve("src/wdl/jsx-runtime.ts"),
+      ...Object.fromEntries((await componentLibraries()).map(library => [library.name, library.entry])),
+      "@generative-world-studio/core/jsx-dev-runtime": await packageEntry("@generative-world-studio/core/jsx-dev-runtime", entry),
+      "@generative-world-studio/core/jsx-runtime": await packageEntry("@generative-world-studio/core/jsx-runtime", entry),
+      "@generative-world-studio/core": await packageEntry("@generative-world-studio/core", entry),
+      "wdl/jsx-dev-runtime": await packageEntry("@generative-world-studio/core/jsx-dev-runtime", entry),
+      "wdl/jsx-runtime": await packageEntry("@generative-world-studio/core/jsx-runtime", entry),
     },
   });
   options?.onDependencies?.(Object.keys(result.metafile!.inputs).map(path => resolve(path)));

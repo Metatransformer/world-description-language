@@ -1,0 +1,23 @@
+{
+  "R": 74,
+  "thick": 1.4,
+  "bays": 64,
+  "pier": 1.5,
+  "storey": 7.2,
+  "spring": 3.6,
+  "half": 1.65,
+  "gateSpring": 5.0,
+  "gateHalf": 1.65,
+  "storey2": 6.0,
+  "spring2": 2.6,
+  "half2": 1.65,
+  "top": 16.5,
+  "pylon": 19,
+  "gates": [
+    0,
+    16,
+    32,
+    48
+  ],
+  "seats": []
+}

@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readdir, readFile, stat } from "node:fs/promises";
 import { dirname, relative, resolve, sep } from "node:path";
+import { componentLibraries } from "../wdl/libraries";
 import {
   compileProject,
   writeWorldArtifacts,
@@ -10,7 +11,7 @@ import {
 
 const ROOT = resolve(process.cwd());
 const ENTRY = resolve(ROOT, process.env.WDL_ENTRY ?? "worlds/valenreach.tsx");
-const SOURCE_ROOTS = [resolve(ROOT, "worlds"), resolve(ROOT, "src/wdl"), resolve(ROOT, "src/dungeon"), resolve(ROOT, "src/runtime")];
+const SOURCE_ROOTS = [resolve(ROOT, "worlds"), resolve(ROOT, "src/wdl"), resolve(ROOT, "src/dungeon"), resolve(ROOT, "src/runtime"), resolve(ROOT, "packages/core/src")];
 
 export type ViewerCamera = {
   position: [number, number, number];
@@ -190,15 +191,18 @@ async function filesUnder(dir: string): Promise<string[]> {
         : [resolve(dir, entry.name)],
     ),
   );
-  return nested.flat().filter((file) => /\.(tsx?|json|md|svg)$/.test(file));
+  return nested.flat().filter((file) => /\.(tsx?|m?js|json|md|svg)$/.test(file));
 }
 async function sourceFingerprint() {
-  const files = (await Promise.all(SOURCE_ROOTS.map(filesUnder))).flat().sort();
+  const libraries = await componentLibraries();
+  const roots = [...SOURCE_ROOTS, ...libraries.flatMap(library => library.roots)];
+  const files = (await Promise.all(roots.map(filesUnder))).flat().sort();
   const hash = createHash("sha256");
   for (const file of files) {
     const info = await stat(file);
     hash.update(`${relative(ROOT, file)}:${info.size}:${info.mtimeMs};`);
   }
+  hash.update(await readFile(resolve(ROOT, "generative-world-studio.json"), "utf8").catch(() => ""));
   return hash.digest("hex");
 }
 function normalizeError(error: unknown): DiagnosticView[] {
@@ -220,9 +224,9 @@ function normalizeError(error: unknown): DiagnosticView[] {
     },
   ];
 }
-export function safeProjectPath(input: string) {
+export async function safeProjectPath(input: string) {
   const path = resolve(ROOT, input);
-  const allowed = SOURCE_ROOTS.some(
+  const allowed = [...SOURCE_ROOTS, ...(await componentLibraries()).flatMap(library => library.roots)].some(
     (root) => path === root || path.startsWith(`${root}${sep}`),
   );
   if (!allowed)
@@ -230,7 +234,7 @@ export function safeProjectPath(input: string) {
   return path;
 }
 export async function readProjectSource(input: string) {
-  const path = safeProjectPath(input);
+  const path = await safeProjectPath(input);
   return { file: relative(ROOT, path), content: await readFile(path, "utf8") };
 }
 

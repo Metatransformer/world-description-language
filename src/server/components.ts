@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import ts from "typescript";
 import type { WorldManifest } from "../wdl/types";
+import { componentLibraries } from "../wdl/libraries";
 
 export type ComponentDefinition = {
   id: string;
@@ -23,7 +24,8 @@ export async function listProjectComponents(manifest?: WorldManifest): Promise<C
       : Promise.resolve(/\.tsx?$/.test(entry.name) ? [join(directory, entry.name)] : [])));
     return nested.flat();
   }
-  const paths = (await Promise.all(["worlds", "src/wdl", "src/dungeon"].map((directory) => files(resolve(root, directory))))).flat().sort();
+  const roots = ["worlds", "src/wdl", "src/dungeon", "packages/core/src", ...(await componentLibraries()).flatMap(library => library.roots)];
+  const paths = [...new Set((await Promise.all(roots.map((directory) => files(resolve(root, directory))))).flat())].sort();
   const definitions: ComponentDefinition[] = [];
   for (const path of paths) {
     const file = relative(root, path).replaceAll("\\", "/");

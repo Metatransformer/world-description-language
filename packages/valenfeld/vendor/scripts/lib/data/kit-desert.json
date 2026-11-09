@@ -1,0 +1,23 @@
+{
+  "tex": {
+    "sand": "cdn/texture-sandstone-blocks-weathered.png",
+    "mud": "cdn/texture-mudbrick-adobe-wall.png",
+    "red": "cdn/texture-faded-red-cloth-weave.png",
+    "ochre": "cdn/texture-faded-ochre-cloth-weave.png",
+    "tile": "cdn/texture-turquoise-blue-glazed-tiles.png",
+    "bark": "cdn/texture-date-palm-trunk-bark.png",
+    "oak": "cdn/texture-dark-oak-planks-weathered.png",
+    "drift": "cdn/texture-weathered-driftwood-planks.png",
+    "iron": "cdn/texture-wrought-iron.png",
+    "clay": "cdn/texture-terracotta-clay-pottery.png",
+    "canvas": "cdn/texture-canvas-weathered.png",
+    "flag": "cdn/texture-sandstone-flagstone-paving.png"
+  },
+  "tint": {
+    "stone": "oklch(0.96 0.012 70)",
+    "wood": "oklch(0.93 0.02 70)",
+    "white": "oklch(0.97 0.01 80)",
+    "iron": "oklch(0.92 0.005 250)",
+    "cloth": "oklch(0.97 0.01 80)"
+  }
+}

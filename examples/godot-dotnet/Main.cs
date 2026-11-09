@@ -162,7 +162,11 @@ public partial class Main : Node3D
         try
         {
             var objects = _runtime.Contract["objects"]!.AsObject();
-            foreach (var id in new[] { "town", "inn", "cottage", "workshop" }) Travel(id, new Vector3(0, 1, 4));
+            foreach (var id in new[] { "town", "inn", "cottage", "workshop", "dungeon" }) Travel(id, new Vector3(0, 1, 4));
+            var seal = objects.First(o => o.Value?["label"]?.GetValue<string>() == "Release the founders' seals").Key;
+            await _runtime.Interact(seal);
+            foreach (var door in objects.Where(o => o.Key.StartsWith("dungeon/") && o.Value?["bindings"]?["solid"] != null))
+                if (_runtime.Binding(door.Key, "solid", true)) throw new Exception("Vault seal did not open");
             var latch = objects.First(o => o.Value?["label"]?.GetValue<string>() == "Toggle workshop storeroom").Key;
             var gate = objects.First(o => o.Key.StartsWith("workshop/") && o.Value?["bindings"]?["solid"] != null).Key;
             if (!_runtime.Binding(gate, "solid", false)) throw new Exception("Workshop gate should start closed");
@@ -178,7 +182,7 @@ public partial class Main : Node3D
             var exit = objects.First(o => o.Value?["label"]?.GetValue<string>() == "Return to Valenfeld").Key;
             await _runtime.Interact(exit);
             if (_spaceId != "town") throw new Exception("Exit did not load town");
-            GD.Print("WDL_SPAWN_SMOKE_OK spaces=4; town -> inn -> town; workshop gate=open; chest persisted; coins=1");
+            GD.Print("WDL_SPAWN_SMOKE_OK spaces=5; town -> inn -> town; workshop gate and vault seals=open; chest persisted; coins=1");
             GetTree().Quit();
         }
         catch (Exception error) { GD.PushError(error.ToString()); GetTree().Quit(1); }

@@ -1,0 +1,592 @@
+{
+  "active": {
+    "architecture": "base",
+    "dungeon": "base",
+    "prop": "base",
+    "tree": "base",
+    "gear": "base",
+    "creature": "base",
+    "person": "base"
+  },
+  "sets": {
+    "base": {
+      "admin": {
+        "category": "architecture",
+        "gen": "scripts/gen/admin.js"
+      },
+      "campus": {
+        "category": "architecture",
+        "gen": "scripts/gen/campus.js"
+      },
+      "curtain-wall": {
+        "category": "architecture",
+        "gen": "scripts/gen/masonry.js",
+        "params": {
+          "f": "block"
+        }
+      },
+      "desert-house": {
+        "category": "architecture",
+        "gen": "scripts/gen/desert-house.js"
+      },
+      "domed-hall": {
+        "category": "architecture",
+        "gen": "scripts/gen/domed-hall.js"
+      },
+      "farmhouse-room": {
+        "category": "architecture",
+        "gen": "scripts/gen/farmhouse-room.js"
+      },
+      "farmstead": {
+        "category": "architecture",
+        "gen": "scripts/gen/farmstead.js"
+      },
+      "fighters-guild": {
+        "category": "architecture",
+        "gen": "scripts/gen/fighters-guild.js"
+      },
+      "fighters-hall": {
+        "category": "architecture",
+        "gen": "scripts/gen/fighters-hall.js"
+      },
+      "fighters-ring": {
+        "category": "architecture",
+        "gen": "scripts/gen/fighters-ring.js"
+      },
+      "furnish": {
+        "category": "architecture",
+        "gen": "scripts/gen/furnish.js"
+      },
+      "harbour": {
+        "category": "architecture",
+        "gen": "scripts/gen/harbour.js"
+      },
+      "harbourhall": {
+        "category": "architecture",
+        "gen": "scripts/gen/harbourhall.js"
+      },
+      "highking-castle": {
+        "category": "architecture",
+        "gen": "scripts/gen/highking-castle.js"
+      },
+      "house": {
+        "category": "architecture",
+        "gen": "scripts/gen/house.js",
+        "params": {
+          "w": 7,
+          "d": 6,
+          "two": true,
+          "storey2": [
+            2.8,
+            5.5
+          ],
+          "storey1": [
+            0.7,
+            3.2
+          ],
+          "jetty": 0.25,
+          "chim": 1,
+          "doorX": 0,
+          "shut": "#a8452e",
+          "roofCol": "oklch(0.95 0.01 200)",
+          "doorCol": "oklch(0.88 0.03 55)",
+          "stepCol": "oklch(0.9 0.012 80)",
+          "potCol": "#8a4a32",
+          "boxCol": "#4f6b4a",
+          "flowers": [
+            "#a8452e",
+            "#c9a45a",
+            "#e8e0d0",
+            "#8a4a8a",
+            "#d06a40"
+          ],
+          "glass": "#2a2620",
+          "glow": [
+            0.36,
+            0.22,
+            0.08
+          ]
+        }
+      },
+      "inn": {
+        "category": "architecture",
+        "gen": "scripts/gen/inn.js",
+        "params": {
+          "roofCol": "oklch(0.95 0.01 200)",
+          "doorCol": "oklch(0.9 0.03 60)"
+        }
+      },
+      "inn-hall": {
+        "category": "architecture",
+        "gen": "scripts/gen/inn-hall.js"
+      },
+      "kaldmoor": {
+        "category": "architecture",
+        "gen": "scripts/gen/kaldmoor.js"
+      },
+      "longhall": {
+        "category": "architecture",
+        "gen": "scripts/gen/longhall.js"
+      },
+      "mages-guild": {
+        "category": "architecture",
+        "gen": "scripts/gen/mages-guild.js"
+      },
+      "mages-hall": {
+        "category": "architecture",
+        "gen": "scripts/gen/mages-hall.js"
+      },
+      "mud-wall": {
+        "category": "architecture",
+        "gen": "scripts/gen/mud-wall.js"
+      },
+      "palisade": {
+        "category": "architecture",
+        "gen": "scripts/gen/palisade.js"
+      },
+      "ruin-tower": {
+        "category": "architecture",
+        "gen": "scripts/gen/ruin-tower.js"
+      },
+      "settlement": {
+        "category": "architecture",
+        "gen": "scripts/gen/settlement.js"
+      },
+      "sky-island": {
+        "category": "architecture",
+        "gen": "scripts/gen/sky-island.js"
+      },
+      "smithy": {
+        "category": "architecture",
+        "gen": "scripts/gen/smithy.js"
+      },
+      "sultana-palace": {
+        "category": "architecture",
+        "gen": "scripts/gen/sultana-palace.js"
+      },
+      "tower": {
+        "category": "architecture",
+        "gen": "scripts/gen/tower.js"
+      },
+      "town-temple": {
+        "category": "architecture",
+        "gen": "scripts/gen/town-temple.js"
+      },
+      "town-wall": {
+        "category": "architecture",
+        "gen": "scripts/gen/town-wall.js"
+      },
+      "valenfeld-keep": {
+        "category": "architecture",
+        "gen": "scripts/gen/valenfeld-keep.js"
+      },
+      "valenfeld-keep-floors": {
+        "category": "architecture",
+        "gen": "scripts/gen/valenfeld-keep-floors.js"
+      },
+      "valenfeld-keep-hall": {
+        "category": "architecture",
+        "gen": "scripts/gen/valenfeld-keep-hall.js"
+      },
+      "barrow-halls": {
+        "category": "dungeon",
+        "gen": "scripts/gen/barrow-halls.js"
+      },
+      "barrow-kit": {
+        "category": "dungeon",
+        "gen": "scripts/gen/barrow-kit.js"
+      },
+      "barrow-mouth": {
+        "category": "dungeon",
+        "gen": "scripts/gen/barrow-mouth.js"
+      },
+      "crowfoot-mine": {
+        "category": "dungeon",
+        "gen": "scripts/gen/crowfoot-mine.js"
+      },
+      "crowfoot-mouth": {
+        "category": "dungeon",
+        "gen": "scripts/gen/crowfoot-mouth.js"
+      },
+      "den": {
+        "category": "dungeon",
+        "gen": "scripts/gen/den.js"
+      },
+      "drowned-halls": {
+        "category": "dungeon",
+        "gen": "scripts/gen/drowned-halls.js"
+      },
+      "drowned-temple": {
+        "category": "dungeon",
+        "gen": "scripts/gen/drowned-temple.js"
+      },
+      "dungeon-kit": {
+        "category": "dungeon",
+        "gen": "scripts/gen/dungeon-kit.js"
+      },
+      "frostfang": {
+        "category": "dungeon",
+        "gen": "scripts/gen/frostfang.js"
+      },
+      "frostfang-mouth": {
+        "category": "dungeon",
+        "gen": "scripts/gen/frostfang-mouth.js"
+      },
+      "gaol": {
+        "category": "dungeon",
+        "gen": "scripts/gen/gaol.js"
+      },
+      "grotto": {
+        "category": "dungeon",
+        "gen": "scripts/gen/grotto.js"
+      },
+      "grotto-kit": {
+        "category": "dungeon",
+        "gen": "scripts/gen/grotto-kit.js"
+      },
+      "grotto-mouth": {
+        "category": "dungeon",
+        "gen": "scripts/gen/grotto-mouth.js"
+      },
+      "sandtomb": {
+        "category": "dungeon",
+        "gen": "scripts/gen/sandtomb.js"
+      },
+      "sandtomb-mouth": {
+        "category": "dungeon",
+        "gen": "scripts/gen/sandtomb-mouth.js"
+      },
+      "airship": {
+        "category": "prop",
+        "gen": "scripts/gen/airship.js"
+      },
+      "campprop": {
+        "category": "prop",
+        "gen": "scripts/gen/campprop.js"
+      },
+      "chest": {
+        "category": "prop",
+        "gen": "scripts/gen/chest.js"
+      },
+      "coach": {
+        "category": "prop",
+        "gen": "scripts/gen/coach.js"
+      },
+      "cog": {
+        "category": "prop",
+        "gen": "scripts/gen/cog.js"
+      },
+      "door": {
+        "category": "prop",
+        "gen": "scripts/gen/door.js"
+      },
+      "harbourprop": {
+        "category": "prop",
+        "gen": "scripts/gen/harbourprop.js"
+      },
+      "herb": {
+        "category": "prop",
+        "gen": "scripts/gen/herb.js",
+        "params": {
+          "form": "herb",
+          "forms": {
+            "herb": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "h": 0.85,
+                "rb": 0.32,
+                "n": 5
+              },
+              {
+                "at": [
+                  0.3,
+                  0,
+                  0.18
+                ],
+                "h": 0.6,
+                "rb": 0.19,
+                "n": 5
+              }
+            ],
+            "cap": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "h": 0.28,
+                "rb": 0.16,
+                "rt": 0.38,
+                "n": 7
+              },
+              {
+                "at": [
+                  0.3,
+                  0,
+                  0.18
+                ],
+                "h": 0.25,
+                "rb": 0.19,
+                "n": 5
+              }
+            ]
+          }
+        }
+      },
+      "market-stall": {
+        "category": "prop",
+        "gen": "scripts/gen/market-stall.js",
+        "params": {
+          "goods": "general",
+          "a": "#a8452e",
+          "b": "#c9a45a",
+          "stripes": 8,
+          "counter": "oklch(0.9 0.03 65)",
+          "crate": "oklch(0.95 0.03 75)",
+          "lamp": "#ffd9a0",
+          "lampGlow": [
+            1.8,
+            1,
+            0.4
+          ],
+          "potions": [
+            "#a8452e",
+            "#2f3d52",
+            "#4f6b4a",
+            "#c9a45a",
+            "#7a3a6a",
+            "#a8452e",
+            "#4f6b4a"
+          ]
+        }
+      },
+      "mast-marker": {
+        "category": "prop",
+        "gen": "scripts/gen/mast-marker.js"
+      },
+      "milestone": {
+        "category": "prop",
+        "gen": "scripts/gen/milestone.js"
+      },
+      "oasis-pool": {
+        "category": "prop",
+        "gen": "scripts/gen/oasis-pool.js"
+      },
+      "prop": {
+        "category": "prop",
+        "gen": "scripts/gen/prop.js"
+      },
+      "shrine": {
+        "category": "prop",
+        "gen": "scripts/gen/shrine.js"
+      },
+      "sign-board": {
+        "category": "prop",
+        "gen": "scripts/gen/sign-board.js",
+        "params": {
+          "w": 2.5,
+          "h": 0.62,
+          "d": 0.08,
+          "tint": "oklch(0.9 0.02 70)"
+        },
+        "ui": "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"font-family:serif;color:#f1e3c0;font-size:150px;line-height:1;letter-spacing:4px;text-align:center;flex-wrap:wrap;padding:0 40px;white-space:normal;overflow:hidden;text-shadow:0 6px 0 #1e140c\">{{ state.label }}</div><div face=\"back\" class=\"w-full h-full flex items-center justify-center\" style=\"font-family:serif;color:#f1e3c0;font-size:150px;line-height:1;letter-spacing:4px;text-align:center;flex-wrap:wrap;padding:0 40px;white-space:normal;overflow:hidden;text-shadow:0 6px 0 #1e140c\">{{ state.label }}</div>"
+      },
+      "signpost": {
+        "category": "prop",
+        "gen": "scripts/gen/signpost.js"
+      },
+      "smithy-gear": {
+        "category": "prop",
+        "gen": "scripts/gen/smithy-gear.js"
+      },
+      "store-sign": {
+        "category": "prop",
+        "gen": "scripts/gen/store-sign.js",
+        "params": {
+          "board": "#3b3a36",
+          "color": "#c9a45a",
+          "icon": "sack"
+        }
+      },
+      "sunscar-prop": {
+        "category": "prop",
+        "gen": "scripts/gen/sunscar-prop.js"
+      },
+      "tent": {
+        "category": "prop",
+        "gen": "scripts/gen/tent.js"
+      },
+      "training-dummy": {
+        "category": "prop",
+        "gen": "scripts/gen/training-dummy.js"
+      },
+      "travel-tower": {
+        "category": "prop",
+        "gen": "scripts/gen/travel-tower.js"
+      },
+      "wayshrine": {
+        "category": "prop",
+        "gen": "scripts/gen/wayshrine.js"
+      },
+      "well": {
+        "category": "prop",
+        "gen": "scripts/gen/well.js",
+        "params": {
+          "rim": "oklch(0.9 0.012 80)",
+          "water": "#16201f",
+          "rope": "#8a7350",
+          "roof": "oklch(0.95 0.01 200)"
+        }
+      },
+      "agave": {
+        "category": "tree",
+        "gen": "scripts/gen/agave.js"
+      },
+      "birch": {
+        "category": "tree",
+        "gen": "scripts/gen/birch.js"
+      },
+      "boulder": {
+        "category": "tree",
+        "gen": "scripts/gen/boulder.js"
+      },
+      "date-palm": {
+        "category": "tree",
+        "gen": "scripts/gen/date-palm.js"
+      },
+      "deadtree": {
+        "category": "tree",
+        "gen": "scripts/gen/deadtree.js"
+      },
+      "driftwood": {
+        "category": "tree",
+        "gen": "scripts/gen/driftwood.js"
+      },
+      "dunegrass": {
+        "category": "tree",
+        "gen": "scripts/gen/dunegrass.js"
+      },
+      "fern": {
+        "category": "tree",
+        "gen": "scripts/gen/fern.js"
+      },
+      "kelp": {
+        "category": "tree",
+        "gen": "scripts/gen/kelp.js"
+      },
+      "log": {
+        "category": "tree",
+        "gen": "scripts/gen/log.js"
+      },
+      "oak": {
+        "category": "tree",
+        "gen": "scripts/gen/oak.js"
+      },
+      "palm": {
+        "category": "tree",
+        "gen": "scripts/gen/palm.js"
+      },
+      "pine": {
+        "category": "tree",
+        "gen": "scripts/gen/pine.js"
+      },
+      "rock": {
+        "category": "tree",
+        "gen": "scripts/gen/rock.js"
+      },
+      "scrub": {
+        "category": "tree",
+        "gen": "scripts/gen/scrub.js"
+      },
+      "snowpine": {
+        "category": "tree",
+        "gen": "scripts/gen/snowpine.js"
+      },
+      "wildflowers": {
+        "category": "tree",
+        "gen": "scripts/gen/wildflowers.js"
+      },
+      "arrow": {
+        "category": "gear",
+        "gen": "scripts/gen/arrow.js"
+      },
+      "axe": {
+        "category": "gear",
+        "gen": "scripts/gen/axe.js"
+      },
+      "bow": {
+        "category": "gear",
+        "gen": "scripts/gen/bow.js"
+      },
+      "greataxe": {
+        "category": "gear",
+        "gen": "scripts/gen/greataxe.js"
+      },
+      "mace": {
+        "category": "gear",
+        "gen": "scripts/gen/mace.js"
+      },
+      "shield": {
+        "category": "gear",
+        "gen": "scripts/gen/shield.js"
+      },
+      "staff": {
+        "category": "gear",
+        "gen": "scripts/gen/staff.js"
+      },
+      "sword": {
+        "category": "gear",
+        "gen": "scripts/gen/sword.js"
+      },
+      "warhammer": {
+        "category": "gear",
+        "gen": "scripts/gen/warhammer.js"
+      },
+      "bird": {
+        "category": "creature",
+        "gen": "scripts/gen/bird.js"
+      },
+      "horse": {
+        "category": "creature",
+        "gen": "scripts/gen/horse.js"
+      },
+      "quad": {
+        "category": "creature",
+        "gen": "scripts/gen/quad.js"
+      },
+      "scorpion": {
+        "category": "creature",
+        "gen": "scripts/gen/scorpion.js"
+      },
+      "serpent": {
+        "category": "creature",
+        "gen": "scripts/gen/serpent.js"
+      },
+      "spider": {
+        "category": "creature",
+        "gen": "scripts/gen/spider.js"
+      },
+      "tide-crab": {
+        "category": "creature",
+        "gen": "scripts/gen/tide-crab.js"
+      },
+      "wolf": {
+        "category": "creature",
+        "gen": "scripts/gen/wolf.js"
+      },
+      "wraith": {
+        "category": "creature",
+        "gen": "scripts/gen/wraith.js"
+      },
+      "eq-humanoid": {
+        "category": "person",
+        "gen": "scripts/gen/eq-humanoid.js"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "tex": {
+    "lime": "cdn/texture-pale-weathered-limestone-blocks.png",
+    "floor": "cdn/texture-worn-limestone-flagstones-wet.png",
+    "bronze": "cdn/texture-verdigris-green-black-bronze.png",
+    "sand": "cdn/texture-rippled-seabed-sand.png"
+  },
+  "finish": {
+    "lime": {
+      "l": 0.93,
+      "ch": "0.015 100",
+      "rough": 0.95
+    },
+    "floor": {
+      "tint": "oklch(0.9 0.02 180)",
+      "rough": 0.8
+    },
+    "bronze": {
+      "tint": "oklch(0.92 0.03 165)",
+      "rough": 0.5,
+      "metal": 0.6
+    },
+    "sand": {
+      "tint": "oklch(0.95 0.02 85)",
+      "rough": 1
+    },
+    "dark": {
+      "tint": "#020605",
+      "rough": 1
+    }
+  },
+  "column": {
+    "r": 0.42
+  },
+  "fallen": {
+    "drums": 4,
+    "r": 0.42
+  }
+}

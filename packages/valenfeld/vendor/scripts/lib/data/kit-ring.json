@@ -1,0 +1,72 @@
+{
+  "R": 6.5,
+  "kerbOut": 7.4,
+  "kerbH": 0.28,
+  "floorY": 0.12,
+  "sink": 0.6,
+  "postH": 1.55,
+  "postR": 0.13,
+  "ropes": [
+    0.62,
+    1.12
+  ],
+  "ropeSag": 0.06,
+  "gate": 0,
+  "stands": {
+    "x": 9.2,
+    "len": 9,
+    "rows": 2,
+    "rise": 0.42,
+    "depth": 0.7
+  },
+  "braziers": [
+    [
+      -2.2,
+      8.3
+    ],
+    [
+      2.2,
+      8.3
+    ]
+  ],
+  "stains": [
+    [
+      1.2,
+      -0.8,
+      0.9
+    ],
+    [
+      -2.4,
+      1.6,
+      0.6
+    ],
+    [
+      2.8,
+      2.2,
+      0.45
+    ],
+    [
+      -0.6,
+      -3.1,
+      0.7
+    ]
+  ],
+  "tex": {
+    "sand": "cdn/texture-packed-training-yard-sand.png",
+    "stone": "cdn/texture-fieldstone-wall-mossy.png",
+    "oak": "cdn/texture-dark-oak-planks-weathered.png",
+    "iron": "cdn/texture-wrought-iron.png",
+    "rope": "cdn/texture-coarse-hemp-rope-fibres.png",
+    "cloth": "cdn/texture-rust-red-wool-cloth.png"
+  },
+  "col": {
+    "sand": "oklch(0.86 0.05 80)",
+    "stone": "oklch(0.82 0.02 90)",
+    "oak": "oklch(0.78 0.04 60)",
+    "iron": "oklch(0.45 0.01 250)",
+    "rope": "oklch(0.8 0.06 80)",
+    "cloth": "#a8452e",
+    "stain": "oklch(0.38 0.07 30)",
+    "coal": "oklch(0.75 0.17 50)"
+  }
+}

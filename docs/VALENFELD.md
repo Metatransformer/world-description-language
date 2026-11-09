@@ -2,6 +2,8 @@
 
 Tell your agent: **“Read docs/AGENT-QUICKSTART.md, launch Valenfeld, and show me its component library and Godot adapter.”**
 
+[Play the hosted demo](https://metatransformer.github.io/world-description-language/demo/) immediately, or run it locally below. The hosted demo uses the toy browser engine; the Godot adapter is available in the repository.
+
 ```sh
 npm ci
 npm run game:spawn:web
@@ -25,6 +27,14 @@ The inn entrance is north of the market square. Cottage and workshop doors are o
 In the workshop, the lever and gate share a private store through action and state-expression props. Each chest has independent persistent state and calls `inventory.grant`. Doors call `world.travel`. Those two capabilities are provided by each engine, while the JSX and contract are shared.
 
 ![Workshop with a lever-controlled storeroom gate](images/valenfeld-workshop.png)
+
+## Founders' Barrow
+
+![Founders' Barrow cutaway with room hierarchy and floorplan](images/founders-barrow-overview.png)
+
+The town's north-east portal leads to a sixteen-room crypt assembled from the shared dungeon kit. Four looping routes connect burial chambers, galleries, supply alcoves, and the Founders' Vault. The entrance lever releases every vault seal; the heirloom chest uses the same portable inventory capability as the town chests.
+
+Choose Founders' Barrow in the toy engine's tour picker to start at the entrance. In Explorer, select the dungeon and use Overview with Ceiling cutaway to inspect the layout from above. It uses one elevation for the toy controller; floors, walls, columns, and furnishings carry collision into both engines. Edit `worlds/spawn/dungeon.tsx` for the authored plan, room names, and interactions.
 
 ## Inspect and run natively
 

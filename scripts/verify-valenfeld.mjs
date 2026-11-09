@@ -7,7 +7,7 @@ try {
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("http://127.0.0.1:5174");
   await page.getByText("TOWN · Coins: 0", { exact: true }).waitFor();
-  for (const space of ["inn", "cottage", "workshop"]) {
+  for (const space of ["inn", "cottage", "dungeon", "workshop"]) {
     await page.selectOption("#destination", space);
     await page.getByRole("button", { name: "Visit", exact: true }).click();
     await page.getByText(space.toUpperCase() + " · Coins: 0", { exact: true }).waitFor();
@@ -33,5 +33,5 @@ try {
   await page.keyboard.press("KeyE");
   assert.equal(await page.locator("#place").textContent(), "WORKSHOP · Coins: 1");
   assert.deepEqual(errors, []);
-  console.log("VALENFELD_BROWSER_OK spaces=4; gate traversed; chest collected once; reload/restore passed.");
+  console.log("VALENFELD_BROWSER_OK spaces=5; gate traversed; chest collected once; reload/restore passed.");
 } finally { await browser.close(); }

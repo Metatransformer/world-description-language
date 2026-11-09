@@ -29,7 +29,9 @@
     "docs:build": "node scripts/build-agent-docs.mjs && vitepress build docs",
     "docs:preview": "vitepress preview docs --host 127.0.0.1 --port 4173",
     "game:spawn:build": "tsx scripts/build-game.ts --entry worlds/spawn-demo.tsx",
-    "game:spawn:editor": "node scripts/run-game.mjs --spawn --editor"
+    "game:spawn:editor": "node scripts/run-game.mjs --spawn --editor",
+    "components:verify": "tsx scripts/verify-component-library.ts",
+    "site:build": "node scripts/build-public-site.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.2",
@@ -64,5 +66,8 @@
   },
   "overrides": {
     "postcss": "^8.5.23"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

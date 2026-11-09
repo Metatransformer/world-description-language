@@ -18,7 +18,7 @@ const cachePath = resolve(".wdl", "game-build-" + buildId + ".json");
 type Cache = { dependencies: string[]; fingerprint: string; outputs: string[]; revision: string };
 async function fingerprint(dependencies: string[]) {
   const hash = createHash("sha256");
-  const paths = new Set([...dependencies, ...(await files("src")), ...(await files("scripts"))]);
+  const paths = new Set([...dependencies, "package.json", "package-lock.json", "generative-world-studio.json", ...(await files("src")), ...(await files("scripts"))]);
   for (const path of [...paths].sort()) {
     hash.update(path);
     try { hash.update(await readFile(path)); } catch { hash.update("missing"); }

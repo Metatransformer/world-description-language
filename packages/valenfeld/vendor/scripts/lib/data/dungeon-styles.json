@@ -1,0 +1,221 @@
+{
+  "barrow": {
+    "wall": "cdn/texture-fieldstone-wall-mossy.png",
+    "floor": "cdn/texture-worn-flagstone-floor-dungeon.png",
+    "ceil": "cdn/texture-root-laced-earth-ceiling.png",
+    "trim": "cdn/texture-carved-granite-blocks.png",
+    "vault": "cdn/texture-ancient-stone-vault-blocks.png",
+    "tint": "oklch(0.92 0.01 90)",
+    "feats": [
+      "bands",
+      "roots",
+      "bones",
+      "sarcophagi",
+      "beams"
+    ],
+    "light": "torch",
+    "spacing": 9,
+    "air": {
+      "sky": "#05060a",
+      "fog": "#0b0d10",
+      "ambient": "oklch(0.6 0.04 240)",
+      "near": 6,
+      "far": 40
+    }
+  },
+  "cave": {
+    "wall": "cdn/texture-wet-grey-slate-sea-cave-rock.png",
+    "floor": "cdn/texture-wet-shingle-cave-floor.png",
+    "ceil": "cdn/texture-wet-grey-slate-sea-cave-rock.png",
+    "trim": "cdn/texture-wet-black-basalt-rock.png",
+    "vault": "cdn/texture-wet-grey-slate-sea-cave-rock.png",
+    "tint": "oklch(0.93 0.01 230)",
+    "feats": [
+      "rocks"
+    ],
+    "light": "firepit",
+    "spacing": 8,
+    "air": {
+      "sky": "#040506",
+      "fog": "#080a0c",
+      "ambient": "oklch(0.6 0.05 220)",
+      "near": 5,
+      "far": 36
+    }
+  },
+  "seacave": {
+    "wall": "cdn/texture-wet-grey-slate-sea-cave-rock.png",
+    "floor": "cdn/texture-wet-shingle-cave-floor.png",
+    "ceil": "cdn/texture-wet-grey-slate-sea-cave-rock.png",
+    "trim": "cdn/texture-wet-black-basalt-rock.png",
+    "vault": "cdn/texture-wet-grey-slate-sea-cave-rock.png",
+    "tint": "oklch(0.93 0.01 230)",
+    "feats": [
+      "rocks",
+      "sea"
+    ],
+    "light": "firepit",
+    "spacing": 8,
+    "air": {
+      "sky": "#040506",
+      "fog": "#080a0c",
+      "ambient": "oklch(0.62 0.07 200)",
+      "near": 5,
+      "far": 36
+    }
+  },
+  "tomb": {
+    "wall": "cdn/texture-carved-granite-blocks.png",
+    "floor": "cdn/texture-worn-flagstone-floor-dungeon.png",
+    "ceil": "cdn/texture-ancient-stone-vault-blocks.png",
+    "trim": "cdn/texture-fieldstone-wall-mossy.png",
+    "vault": "cdn/texture-ancient-stone-vault-blocks.png",
+    "tint": "oklch(0.9 0.012 250)",
+    "feats": [
+      "bands",
+      "columns",
+      "bones",
+      "sarcophagi"
+    ],
+    "light": "torch",
+    "spacing": 8,
+    "air": {
+      "sky": "#05060a",
+      "fog": "#0c0e12",
+      "ambient": "oklch(0.6 0.03 240)",
+      "near": 7,
+      "far": 44
+    }
+  },
+  "mine": {
+    "wall": "cdn/texture-granite-rock-lichen.png",
+    "floor": "cdn/texture-packed-gravel-mine-floor.png",
+    "ceil": "cdn/texture-granite-rock-lichen.png",
+    "trim": "cdn/texture-dark-oak-planks-weathered.png",
+    "vault": "cdn/texture-granite-rock-lichen.png",
+    "tint": "oklch(0.92 0.01 80)",
+    "feats": [
+      "props",
+      "rocks",
+      "rails"
+    ],
+    "light": "torch",
+    "spacing": 9,
+    "air": {
+      "sky": "#050505",
+      "fog": "#0c0b09",
+      "ambient": "oklch(0.6 0.04 60)",
+      "near": 6,
+      "far": 38
+    }
+  },
+  "fortress": {
+    "wall": "cdn/texture-grey-ashlar-stone-wall.png",
+    "floor": "cdn/texture-flagstone-floor-worn.png",
+    "ceil": "cdn/texture-ancient-stone-vault-blocks.png",
+    "trim": "cdn/texture-carved-granite-blocks.png",
+    "vault": "cdn/texture-ancient-stone-vault-blocks.png",
+    "tint": "oklch(0.93 0.005 250)",
+    "feats": [
+      "bands",
+      "beams",
+      "columns"
+    ],
+    "light": "torch",
+    "spacing": 9,
+    "air": {
+      "sky": "#05060a",
+      "fog": "#0b0d10",
+      "ambient": "oklch(0.62 0.03 250)",
+      "near": 8,
+      "far": 46
+    }
+  },
+  "temple": {
+    "wall": "cdn/texture-pale-limestone-ashlar-blocks.png",
+    "floor": "cdn/texture-white-marble.png",
+    "ceil": "cdn/texture-pale-limestone-ashlar-blocks.png",
+    "trim": "cdn/texture-white-marble.png",
+    "vault": "cdn/texture-pale-limestone-ashlar-blocks.png",
+    "tint": "oklch(0.94 0.01 90)",
+    "feats": [
+      "bands",
+      "columns"
+    ],
+    "light": "torch",
+    "spacing": 9,
+    "air": {
+      "sky": "#06070a",
+      "fog": "#0e0f12",
+      "ambient": "oklch(0.64 0.03 90)",
+      "near": 8,
+      "far": 48
+    }
+  },
+  "sewer": {
+    "wall": "cdn/texture-old-red-brick-sewer-wall-grimy.png",
+    "floor": "cdn/texture-wet-cobblestone-sewer-floor-slimy.png",
+    "ceil": "cdn/texture-old-red-brick-sewer-wall-grimy.png",
+    "trim": "cdn/texture-carved-granite-blocks.png",
+    "vault": "cdn/texture-old-red-brick-sewer-wall-grimy.png",
+    "tint": "oklch(0.92 0.01 60)",
+    "feats": [
+      "bands",
+      "channel"
+    ],
+    "light": "torch",
+    "spacing": 9,
+    "air": {
+      "sky": "#050605",
+      "fog": "#0b0e0b",
+      "ambient": "oklch(0.6 0.05 140)",
+      "near": 6,
+      "far": 38
+    }
+  },
+  "underwater": {
+    "wall": "cdn/texture-carved-granite-blocks.png",
+    "floor": "cdn/texture-wet-cobblestone-sewer-floor-slimy.png",
+    "ceil": "cdn/texture-wet-black-basalt-rock.png",
+    "trim": "cdn/texture-ancient-stone-vault-blocks.png",
+    "vault": "cdn/texture-wet-black-basalt-rock.png",
+    "tint": "oklch(0.92 0.03 190)",
+    "feats": [
+      "bands",
+      "columns",
+      "rocks"
+    ],
+    "light": "torch",
+    "spacing": 9,
+    "air": {
+      "sky": "#03070a",
+      "fog": "#081418",
+      "ambient": "oklch(0.6 0.06 200)",
+      "near": 5,
+      "far": 34
+    }
+  },
+  "ruin": {
+    "wall": "cdn/texture-dark-fieldstone-wall-lichen.png",
+    "floor": "cdn/texture-worn-flagstone-floor.png",
+    "ceil": "cdn/texture-rough-fieldstone-wall.png",
+    "trim": "cdn/texture-lichen-fieldstone-cliff.png",
+    "vault": "cdn/texture-rough-fieldstone-wall.png",
+    "tint": "oklch(0.92 0.01 120)",
+    "feats": [
+      "bands",
+      "sky",
+      "roots",
+      "columns"
+    ],
+    "light": "torch",
+    "spacing": 10,
+    "air": {
+      "sky": "#1a2030",
+      "fog": "#121620",
+      "ambient": "oklch(0.66 0.04 240)",
+      "near": 10,
+      "far": 60
+    }
+  }
+}

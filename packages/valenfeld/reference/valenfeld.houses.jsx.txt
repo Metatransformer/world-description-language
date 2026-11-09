@@ -1,0 +1,23 @@
+/** @jsx h */
+/** @jsxFrag Fragment */
+// VALENFELD'S HOUSES, written as architecture: each is a <House> in a style with its parts. They ride the town root whole
+// (valenfeld.core.mjs puts them in its children), so each comes out as an inline child via houseChild, smoke and all.
+// at: metres local to the town root (+x east, +z south); front faces -z before the yaw.
+import { h, Fragment } from "../../../tools/place/react.mjs";
+import { House, Storey, Roof, Windows, Chimney, houseChild } from "../../../mods/place-language/components/architecture/index.mjs";
+
+const SLATE = "oklch(0.95 0.01 200)", THATCH = "cdn/texture-hay-bale-straw.png";
+export const HOUSE_ELEMENTS = [
+  <House id="house-1" at={[-32, 0, -10]} yaw={180} w={7}><Roof color={SLATE} /><Windows shutters="#2f3d52" /><Chimney side={1} /></House>,
+  <House id="house-2" at={[-32, 0, 10]} w={7}><Roof color="oklch(0.72 0.11 40)" /><Windows shutters="#2f3d52" /><Chimney side={-1} /></House>,
+  <House id="house-3" at={[-32, 2.1, 27]} w={6}><Storey two={false} /><Roof color="oklch(0.85 0.07 85)" texture={THATCH} /><Windows shutters="#4f6b4a" /><Chimney side={1} /></House>,
+  <House id="house-4" at={[-14, 0, 32]} w={8}><Roof color="oklch(0.75 0.05 160)" /><Windows shutters="#a8452e" /><Chimney side={1} /></House>,
+  <House id="house-5" at={[30, 0, 10]} w={7}><Roof color={SLATE} /><Windows shutters="#4f6b4a" /><Chimney side={1} /></House>,
+  <House id="house-6" at={[31, 0, -10]} yaw={180} w={7}><Roof color="oklch(0.68 0.12 35)" /><Windows shutters="#c9a45a" /><Chimney side={-1} /></House>,
+  <House id="house-7" at={[32, 0, 27]} w={6}><Storey two={false} /><Roof color="oklch(0.8 0.08 80)" texture={THATCH} /><Windows shutters="#2f3d52" /><Chimney side={-1} /></House>,
+  <House id="house-8" at={[14, 0, 31]} w={7} d={5}><Roof color="oklch(0.82 0.07 85)" texture={THATCH} /><Windows shutters="#a8452e" /><Chimney side={-1} /></House>,
+];
+// Valenfeld's house look, one table under all eight (harvested from the rows as they stood): a house's own parts win over it
+export const VALEN_HOUSE_LOOK = { boxCol: "#4f6b4a", doorCol: "oklch(0.88 0.03 55)", doorX: 0, flowers: ["#a8452e", "#c9a45a", "#e8e0d0", "#8a4a8a", "#d06a40"],
+  glass: "#2a2620", glow: [0.36, 0.22, 0.08], jetty: 0.25, potCol: "#8a4a32", stepCol: "oklch(0.9 0.012 80)", storey1: [0.7, 3.2], storey2: [2.8, 5.5], two: true };
+export const HOUSES = HOUSE_ELEMENTS.map((el) => houseChild(el, VALEN_HOUSE_LOOK));

@@ -101,7 +101,7 @@ Before exporting the Godot game, generate native scenes and include generated JS
 
 ## 6. Verify the target game
 
-- Load all four spaces and return to town through their doors.
+- Load all five spaces and return to town through their doors.
 - Operate the workshop lever; verify the gate's visibility and physical collision both change.
 - Collect a chest twice; inventory receives one item. Save, restart, restore; the chest remains collected.
 - Place two copies of a reusable component with distinct InstanceIds and confirm their state is independent.

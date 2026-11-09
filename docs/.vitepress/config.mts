@@ -8,11 +8,11 @@ export default defineConfig({
   themeConfig: {
     siteTitle: "Generative World Studio",
     search: { provider: "local" },
-    nav: [{ text: "Agent quickstart", link: "/AGENT-QUICKSTART" }, { text: "Valenfeld", link: "/VALENFELD" }],
+    nav: [{ text: "Play demo", link: "https://metatransformer.github.io/world-description-language/demo/" }, { text: "Agent quickstart", link: "/AGENT-QUICKSTART" }, { text: "Valenfeld", link: "/VALENFELD" }],
     sidebar: [
       { text: "Start", items: [{ text: "Overview", link: "/" }, { text: "Agent quickstart", link: "/AGENT-QUICKSTART" }, { text: "Play Valenfeld", link: "/VALENFELD" }] },
       { text: "Integrate", items: [{ text: "Godot recipe", link: "/INTEGRATION" }, { text: "Runtime reference", link: "/GODOT" }, { text: "Artifact contract", link: "/ARTIFACT-CONTRACT" }] },
-      { text: "Author", items: [{ text: "JSX authoring", link: "/AUTHORING" }, { text: "Dungeons", link: "/DUNGEONS" }, { text: "Spawn provenance", link: "/SPAWN-PORT" }] },
+      { text: "Author", items: [{ text: "Component packages", link: "/COMPONENT-LIBRARIES" }, { text: "JSX authoring", link: "/AUTHORING" }, { text: "Dungeons", link: "/DUNGEONS" }, { text: "Spawn provenance", link: "/SPAWN-PORT" }] },
     ],
   },
 });

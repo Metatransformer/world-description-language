@@ -1,0 +1,33 @@
+{
+  "name": "@generative-world-studio/valenfeld",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Generative World Studio valenfeld build-time JSX library",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src",
+    "vendor",
+    "reference",
+    "provenance.json",
+    "README.md",
+    "LICENSE",
+    "catalog.json"
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@generative-world-studio/core": "^0.1.0"
+  },
+  "dependencies": {},
+  "generativeWorldStudio": {
+    "version": 1,
+    "entry": "./src/index.ts",
+    "sources": [
+      "src",
+      "vendor/scripts"
+    ],
+    "catalog": "./catalog.json"
+  }
+}

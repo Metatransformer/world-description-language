@@ -2,6 +2,8 @@
 
 Compose portable game worlds in JSX. Explore a component library, play it in a toy browser engine, and import native scenes and behavior into Godot .NET.
 
+[Live documentation](https://metatransformer.github.io/world-description-language/) · [Play Valenfeld](https://metatransformer.github.io/world-description-language/demo/)
+
 ## Tell your agent
 
 > Read AGENTS.md and docs/AGENT-QUICKSTART.md. Launch Valenfeld in the browser and Explorer, then integrate its scenes and behavior into my Godot .NET game using my player controller and inventory. Verify travel, the workshop gate, and save/restore.
@@ -17,6 +19,8 @@ npm run docs:dev            # searchable documentation at localhost:4173
 ```
 
 **Previously WDL.** The product is now Generative World Studio. Existing `wdl` API names, source paths, commands, and this repository URL remain compatible. Agents read Markdown directly; the VitePress documentation build also emits `llms.txt`, `llms-full.txt`, and raw Markdown exports.
+
+The bundled [Valenfeld component package](packages/valenfeld/README.md) provides 214 procedural visual components plus reusable Village and Woodland compositions. See [component libraries](docs/COMPONENT-LIBRARIES.md) for npm package imports, local tarball installation, and publishing your own kits. These workspace packages are not yet published to the npm registry.
 
 ![Dungeon workbench with a clickable floorplan](docs/images/dungeon-workbench.png)
 

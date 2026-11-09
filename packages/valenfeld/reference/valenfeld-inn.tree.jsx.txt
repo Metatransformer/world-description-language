@@ -1,0 +1,49 @@
+/** @jsx h */
+/** @jsxFrag Fragment */
+// THE DROWNED LANTERN, AS IT STANDS: north is -z, the street door north; the common room is the ground floor, the rented rooms the
+// east wing (two rows of three beds), and under it all the cellar (-3.4 m) where the stores stand and the thieves keep their den.
+import { h, Fragment } from "../../../tools/place/react.mjs";
+import { Interior, Keep, ExitDoor, Lamp, Resident, CommonRoom, Bunkroom, Cellar, Crowd, Stock, InnBed, Lectern, CacheNote, Shell } from "../components/hall.mjs";
+import HELD from "./valenfeld-inn.held.json";
+import BOOKS from "./valenfeld-books.json";
+
+const RENT = { inn: "the Drowned Lantern", keeper: "Marta" };
+
+export const ValenfeldInn = () => (
+  <Interior place="inn">
+    <Shell id="inn-interior" kit="innHall" tags={["building", "inn"]} flames={[["hearth-fire", [0, 0], 0.62, "roundHearth"]]} lights={[["hearth-light", [0, 0], 1.4, "#ffb070", 40, 14], ["taproom-light", [-5, -0.5], 2.7, "#ffb070", 14, 9], ["taproom-light-east", [5, -0.5], 2.7, "#ffb070", 14, 9], ["bar-light", [0, 5], 2.95, "#ffb070", 18, 9], ["wing-light-1", [10.7, 0], 2.4, "#ffb070", 8, 7], ["wing-light-2", [13.5, 0], 2.4, "#ffb070", 8, 7], ["wing-light-3", [16.3, 0], 2.4, "#ffb070", 8, 7], ["cellar-light-casks", [-5, 2.5], -1.35, "#ff9a50", 11, 8], ["cellar-light-stair", [-7, -3.5], -1.25, "#ff9a50", 9, 8], ["cellar-light-meeting", [1, 3.5], -1.3, "#ff9a50", 13, 8], ["cellar-light-supplies", [7, 2.5], -1.35, "#ff9a50", 9, 8], ["cellar-light-fence", [3, -4.5], -1.3, "#ff9a50", 11, 8]]} why="the inn itself: walls, bar, tables, benches, hearth, the cellar stair" />
+    <Lectern id="act1-book-inn" at={[1.8, -4]} y={0.2} cover="oklch(0.4 0.09 30)" rough={0.8} bookYaw={0} book={BOOKS["act1-book-inn"]} />
+    <Lectern id="book-lowcellar-cant" at={[1, -4.6]} y={0.2} cover="oklch(0.3 0.03 30)" rough={0.9} size={[0.24, 0.04, 0.3]} book={BOOKS["book-lowcellar-cant"]} />
+    <Lectern id="book-turned-year-inn" at={[2.6, -4.6]} y={0.2} cover="oklch(0.42 0.08 90)" rough={0.8} book={BOOKS["book-turned-year-inn"]} />
+    <CacheNote id="cache-note-cold-hearth" at={[0.7, -3.8]} y={0.2} cache="cold-hearth" note={BOOKS["cache-note-cold-hearth"]} />
+    <ExitDoor id="inn-exit" at={[0, -6.75]} to="+main#inn-door" prompt="Leave to Valenfeld" w={1.6} h={2.6} hinge={-1} leaf={0.25} yaw={180} />
+    <Lamp id="inn-fill-lamp" at={[-4.375, 0]} y={2.943} color="#ffb070" intensity={33} distance={16.2} />
+
+    <CommonRoom prefix="inn-trav" npc="folk-traveler" people={[
+      { name: "Valdis Hallek", race: "human", sex: "m", at: [-5.6, -3.95], yaw: 180 },
+      { name: "Darya Dunewalker", race: "reshi", sex: "f", at: [-4.3, -3.95], yaw: 180, pose: "laugh" },
+      { name: "Brokkar Pickmorrow", race: "stoneborn", sex: "m", at: [4.6, -2.45], yaw: 0 },
+      { name: "Vespa", race: "asheni", sex: "f", at: [5.8, 2.95], yaw: 0 },
+      { name: "Dushak", race: "korl", sex: "m", at: [-5.2, 1.45], yaw: 180, pose: "laugh" },
+      { name: "Nessa Hargrave", race: "human", sex: "f", at: [-2.2, 4], yaw: 180, pose: "talk" },
+      { name: "Syllas Mistvale", race: "vyr", sex: "m", at: [2.4, 4], yaw: 170, pose: "idle" }]}>
+      <Resident id="npc-marta" npc="innkeeper" name="Marta" race="human" sex="f" at={[0, 6.1]} why="behind the bar: rents the beds, sells potions" />
+    </CommonRoom>
+
+    <Bunkroom name="rented rooms (east)" beds={[
+      { prefix: "inn-bed", along: "x", step: 2.8, at: [10.7, -3.6], as: InnBed, bed: RENT, beds: [{ col: "#7a3a30" }, { col: "#3f5a3c" }, { col: "#34445e" }] },
+      { prefix: "inn-bed", from: 4, along: "x", step: 2.8, at: [10.7, 3.6], as: InnBed, bed: RENT, beds: [{ col: "#6e4a2a" }, { col: "#5a3440" }, { col: "#3c5450" }] }]} />
+
+    <Cellar floor={-3.4} prefix="inn" stock={[["barrel", [-5.3, 6.35], 190], ["barrel", [-4.55, 6.4], 172], ["crate", [7.6, 6.3], 112], ["chest", [8.6, -6.45], 180]]}>
+      <Stock prefix="inn-cellar" from={5} items={[["crate", [-6.3, -5.6], 23], ["crate", [8.6, -3.1], 74], ["barrel", [8.7, 2.6], 40]]} />
+      <Crowd prefix="inn-thief" npc="folk-thief" people={[
+        { name: "Qalun Deepgill", race: "hessk", sex: "m", at: [0.2, 2.7], yaw: 180 },
+        { name: "Svea Ostrava", race: "human", sex: "f", at: [1.9, 4.3], yaw: 0 },
+        { name: "Rustam", race: "reshi", sex: "m", at: [-1.6, 5.6], yaw: 120, pose: "talk" },
+        { name: "Marrow the Fence", race: "stoneborn", sex: "f", at: [3, -6.3], yaw: 180, pose: "idle" }]} />
+      <Resident id="npc-pip-wren" npc="thieves-steward-valenfeld" name="Pip Wren" race="human" sex="m" at={[4.4, 2.4]} y={-3.28} yaw={240} look={{ trader: "valenfeld-fence-pip" }} />
+      <Resident id="npc-sable" npc="sable" name="Sable Vey" race="hessk" sex="f" at={[3.4, 3.5]} y={-3.28} yaw={90} />
+    </Cellar>
+  </Interior>
+);
+export const tree = <ValenfeldInn />;

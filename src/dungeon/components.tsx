@@ -1,4 +1,10 @@
-import { Connection, Group, Mesh, Space } from "../wdl/index.js";
+import { Connection, Group, Mesh as WorldMesh, Space } from "../wdl/index.js";
+import type { ComponentProps } from "react";
+
+// Architectural meshes carry collision into every consuming engine.
+function Mesh(props: ComponentProps<typeof WorldMesh>) {
+  return <WorldMesh key="mesh" {...props} properties={{ ...props.properties, wdl: { solid: true } }} />;
+}
 import type {
   DoorSide,
   DungeonCorridor,
