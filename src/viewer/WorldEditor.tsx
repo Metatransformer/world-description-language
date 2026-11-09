@@ -267,7 +267,7 @@ export function WorldEditor() {
   if (!manifest || !summary)
     return (
       <main className="loading">
-        <span className="sigil">W</span>
+        <span className="sigil">G</span>
         <p>{notice ?? "Compiling Valenreach…"}</p>
       </main>
     );
@@ -277,10 +277,10 @@ export function WorldEditor() {
     <main className="workbench">
       <header>
         <div className="brand">
-          <span className="sigil">W</span>
+          <span className="sigil">G</span>
           <div>
-            <strong>WDL</strong>
-            <small>WORLD DESCRIPTION LANGUAGE</small>
+            <strong>Generative World Studio</strong>
+            <small>JSX WORLD EXPLORER</small>
           </div>
         </div>
         <div className="project">

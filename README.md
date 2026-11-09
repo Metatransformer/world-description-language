@@ -1,10 +1,22 @@
-# WDL — World Description Language
+# Generative World Studio
 
-Compose game worlds in TypeScript and JSX. Explore them in a Three.js browser workbench, then export portable scenes to Blender.
+Compose portable game worlds in JSX. Explore a component library, play it in a toy browser engine, and import native scenes and behavior into Godot .NET.
 
-**New: portable behavior and Godot .NET demo.** Build a connected JSX RPG world with doors, a lever-controlled gate, and persistent chests. Run it in Godot C# or the separate Three.js runtime. See the [Godot and portable-world guide](docs/GODOT.md) and [implementation spec](docs/specs/PORTABLE-WORLDS.md).
+## Tell your agent
 
-WDL is an open-source experiment in **React for game worlds**: reusable components describe places, materials, geometry, procedural placement, and connections. A compiler turns that program into world data. The included Valenreach fantasy region combines a town, wilderness, interiors, and two procedural dungeons.
+> Read AGENTS.md and docs/AGENT-QUICKSTART.md. Launch Valenfeld in the browser and Explorer, then integrate its scenes and behavior into my Godot .NET game using my player controller and inventory. Verify travel, the workshop gate, and save/restore.
+
+Start with the [agent quickstart](docs/AGENT-QUICKSTART.md), [playable Valenfeld example](docs/VALENFELD.md), or [Godot integration recipe](docs/INTEGRATION.md). The example has eight houses, a market square, an inn, a cottage, and a workshop. Both game adapters consume the same compiled world and state contract.
+
+```sh
+npm ci
+npm run game:spawn:web      # playable browser example
+npm run game:spawn:explorer # inspect JSX components (separate terminal)
+npm run game:spawn          # native Godot .NET example
+npm run docs:dev            # searchable documentation at localhost:4173
+```
+
+**Previously WDL.** The product is now Generative World Studio. Existing `wdl` API names, source paths, commands, and this repository URL remain compatible. Agents read Markdown directly; the VitePress documentation build also emits `llms.txt`, `llms-full.txt`, and raw Markdown exports.
 
 ![Dungeon workbench with a clickable floorplan](docs/images/dungeon-workbench.png)
 
@@ -63,7 +75,7 @@ TypeScript + JSX + vocabularies + explicit seeds
      Three.js workbench         glTF scenes → Blender
 ```
 
-WDL uses real React elements and function composition. It does not run a DOM renderer or a game update loop. Stable keys give authored objects identities, and seeded algorithms generate repeatable placements. Compilation does not call an LLM. Gameplay is described through properties and contracts for a consuming game to implement.
+Generative World Studio uses real React elements and function composition. It does not run a DOM renderer or a game update loop. Stable keys give authored objects identities, and seeded algorithms generate repeatable placements. Compilation does not call an LLM. Gameplay is described through properties and contracts for a consuming game to implement.
 
 The [artifact contract](docs/ARTIFACT-CONTRACT.md) is independent of TypeScript and Three.js. Blender import and an initial Godot C# adapter are implemented; Unity and Unreal adapters are future work.
 
@@ -109,6 +121,6 @@ Use `PLAYWRIGHT_CHANNEL=chrome npm run test:e2e` to test with installed Chrome. 
 
 For a production server, run `npm run build` followed by `npm start -- --hostname 127.0.0.1`.
 
-This is an early local developer tool. World programs execute trusted local code. The demo uses original procedural geometry and materials; it does not include commercial game assets or game mechanics.
+This is an early local developer tool. World programs execute trusted local code. The demo uses original procedural geometry and materials; it includes small demonstration mechanics, not a production game framework.
 
 Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md). Released under the [MIT license](LICENSE).

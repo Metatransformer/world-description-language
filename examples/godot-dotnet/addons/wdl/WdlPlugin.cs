@@ -27,7 +27,7 @@ public partial class WdlPlugin : EditorPlugin
         if (Godot.FileAccess.FileExists("res://generated/imported-revision.txt"))
             _revision = Godot.FileAccess.GetFileAsString("res://generated/imported-revision.txt");
         _dock = new VBoxContainer { Name = "WDL" };
-        _dock.AddChild(new Label { Text = "WDL / JSX world builds" });
+        _dock.AddChild(new Label { Text = "Generative World Studio / JSX builds" });
         _node = new LineEdit { Text = "node", PlaceholderText = "Node executable" };
         _repository = new LineEdit { Text = Path.GetFullPath(Path.Combine(ProjectSettings.GlobalizePath("res://"), "../..")), PlaceholderText = "WDL repository directory" };
         _dock.AddChild(_node);
@@ -42,7 +42,7 @@ public partial class WdlPlugin : EditorPlugin
         AddButton("Import latest successful build", Import);
         _status = new Label { Text = "Ready. Generated internals are owned by JSX.", AutowrapMode = TextServer.AutowrapMode.WordSmart };
         _dock.AddChild(_status);
-        _host = new EditorDock { Title = "WDL", DefaultSlot = EditorDock.DockSlot.RightUl };
+        _host = new EditorDock { Title = "World Studio", DefaultSlot = EditorDock.DockSlot.RightUl };
         _host.AddChild(_dock);
         AddDock(_host);
         SetProcess(true);

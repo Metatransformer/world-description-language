@@ -18,6 +18,8 @@ public partial class Main : Node3D
     private int _coins;
     private float _pitch;
     private bool _busy;
+    private string _title = "Alder Vale";
+    private string SavePath => "user://wdl-" + SceneImporter.Filename(_title) + ".json";
     public override void _Ready()
     {
         try
@@ -33,6 +35,9 @@ public partial class Main : Node3D
             }
             if (!FileAccess.FileExists("res://generated/scenes/town.tscn"))
                 SceneImporter.Import();
+            var manifest = SceneImporter.Read("res://generated/manifest.json");
+            _title = manifest["name"]!.GetValue<string>();
+            DisplayServer.WindowSetTitle(_title + " · Godot .NET");
             var environment = new WorldEnvironment { Environment = new Godot.Environment {
                 BackgroundMode = Godot.Environment.BGMode.Color, BackgroundColor = new Color("#152530"),
                 AmbientLightSource = Godot.Environment.AmbientSource.Color, AmbientLightColor = new Color("#c3d3da"), AmbientLightEnergy = 0.35f,
@@ -57,7 +62,11 @@ public partial class Main : Node3D
                 },
                 cap_inventory_grant: item => { _coins++; _message = "Collected " + item; return Task.CompletedTask; }
             ));
-            Travel("town", new Vector3(0, 1, 10));
+            var start = manifest["metadata"]?["start"];
+            var position = start?["position"]?.AsArray();
+            Travel(start?["space"]?.GetValue<string>() ?? "town", position == null ? new Vector3(0, 1, 10)
+                : new Vector3((float)position[0]!, (float)position[1]!, (float)position[2]!));
+            if (OS.GetCmdlineUserArgs().Contains("--smoke-spawn")) { SmokeSpawn(); return; }
             if (OS.GetCmdlineUserArgs().Contains("--smoke-test")) { SmokeTest(); return; }
             if (OS.GetCmdlineUserArgs().Contains("--capture")) { Capture(); return; }
             Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -110,7 +119,7 @@ public partial class Main : Node3D
         velocity.Y = _player.IsOnFloor() ? -0.1f : velocity.Y - 20 * (float)delta;
         _player.Velocity = velocity; _player.MoveAndSlide();
         var target = _space?.Nearest(_player.GlobalPosition + Vector3.Up);
-        _hud.Text = "  ALDER VALE / " + _spaceId.ToUpperInvariant() + "  \n"
+        _hud.Text = "  " + _title + " / " + _spaceId.ToUpperInvariant() + "  \n"
             + "  WDL → Godot C# · Coins: " + _coins + "  \n"
             + "  WASD walk · Mouse look · E interact · Shift sprint  \n"
             + "  F5 save · F9 restore · Esc release mouse  \n\n"
@@ -131,7 +140,7 @@ public partial class Main : Node3D
         {
             var save = new JsonObject { ["world"] = _runtime.Snapshot(), ["coins"] = _coins, ["space"] = _spaceId,
                 ["position"] = new JsonArray(_player.Position.X, _player.Position.Y, _player.Position.Z) };
-            using var file = FileAccess.Open("user://alder-vale.json", FileAccess.ModeFlags.Write);
+            using var file = FileAccess.Open(SavePath, FileAccess.ModeFlags.Write);
             file.StoreString(save.ToJsonString()); _message = "Saved world and inventory";
         }
         catch (Exception error) { _message = error.Message; }
@@ -140,13 +149,39 @@ public partial class Main : Node3D
     {
         try
         {
-            var save = SceneImporter.Read("user://alder-vale.json");
+            var save = SceneImporter.Read(SavePath);
             _runtime.Restore(save["world"]!.AsObject()); _coins = save["coins"]!.GetValue<int>();
             var p = save["position"]!.AsArray();
             Travel(save["space"]!.GetValue<string>(), new Vector3((float)p[0]!, (float)p[1]!, (float)p[2]!));
             _message = "Restored world and inventory";
         }
         catch (Exception error) { _message = error.Message; }
+    }
+    private async void SmokeSpawn()
+    {
+        try
+        {
+            var objects = _runtime.Contract["objects"]!.AsObject();
+            foreach (var id in new[] { "town", "inn", "cottage", "workshop" }) Travel(id, new Vector3(0, 1, 4));
+            var latch = objects.First(o => o.Value?["label"]?.GetValue<string>() == "Toggle workshop storeroom").Key;
+            var gate = objects.First(o => o.Key.StartsWith("workshop/") && o.Value?["bindings"]?["solid"] != null).Key;
+            if (!_runtime.Binding(gate, "solid", false)) throw new Exception("Workshop gate should start closed");
+            await _runtime.Interact(latch);
+            if (_runtime.Binding(gate, "solid", true)) throw new Exception("Workshop gate did not open");
+            var entrance = objects.First(o => o.Value?["label"]?.GetValue<string>() == "Enter the Drowned Lantern").Key;
+            await _runtime.Interact(entrance);
+            if (_spaceId != "inn") throw new Exception("Entrance did not load inn");
+            var chest = objects.First(o => o.Key.StartsWith("inn/") && o.Value?["label"]?.GetValue<string>() == "Open Valenfeld chest").Key;
+            await _runtime.Interact(chest); await _runtime.Interact(chest);
+            _runtime.Restore(_runtime.Snapshot());
+            if (_coins != 1 || _runtime.Binding(chest, "visible", true)) throw new Exception("Chest state did not persist");
+            var exit = objects.First(o => o.Value?["label"]?.GetValue<string>() == "Return to Valenfeld").Key;
+            await _runtime.Interact(exit);
+            if (_spaceId != "town") throw new Exception("Exit did not load town");
+            GD.Print("WDL_SPAWN_SMOKE_OK spaces=4; town -> inn -> town; workshop gate=open; chest persisted; coins=1");
+            GetTree().Quit();
+        }
+        catch (Exception error) { GD.PushError(error.ToString()); GetTree().Quit(1); }
     }
     private async void SmokeTest()
     {

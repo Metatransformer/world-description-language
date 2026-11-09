@@ -39,11 +39,11 @@ export function House({ position, to, label }: { position: Vec3; to: string; lab
     <Block key="window-b" size={[1.2, 1.2, 0.15]} position={[2.2, 2.5, 2.55]} material="water" solid={false} />
   </Group>;
 }
-export function Lever({ position, onInteract }: { position: Vec3; onInteract: ActionRef }) {
+export function Lever({ position, onInteract, label = "Toggle dungeon gate" }: { position: Vec3; onInteract: ActionRef; label?: string }) {
   return <Group key="root" position={position}>
     <Block key="base" size={[1.2, 0.5, 1.2]} position={[0, 0.25, 0]} />
     <Mesh key="handle" position={[0, 1.1, 0]} material="gold" geometry={{ shape: "box", size: [0.3, 1.3, 0.3] }}
-      properties={{ wdl: { interact: onInteract, label: "Toggle dungeon gate" } }} />
+      properties={{ wdl: { interact: onInteract, label } }} />
   </Group>;
 }
 export function Gate({ position, open }: { position: Vec3; open: Expr }) {

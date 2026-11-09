@@ -1,10 +1,23 @@
-# Portable worlds: Godot C# and Three.js
+# Generative World Studio runtime reference
+
+Start with the [agent quickstart](AGENT-QUICKSTART.md), [Valenfeld example](VALENFELD.md), and [integration recipe](INTEGRATION.md). This page documents runtime semantics and the smaller Alder Vale test fixture.
 
 The Alder Vale demo compiles JSX into five textured spaces: town, woodland, inn, cottage, and dungeon. Both engines execute the same state/action contract. Godot uses C#/.NET; no JavaScript runtime ships in the Godot game.
 
 ![Alder Vale rendered in the Godot C# demo](images/alder-vale-godot.png)
 
 ## Run the Godot demo
+
+From either the demo workspace folder or the WDL repository, run:
+
+```sh
+npm run game          # build world + C#, import scenes, open the native game
+npm run game:editor   # same setup, then open the Godot editor
+npm run game:web      # build world, start the web server, open your browser
+npm run game:explorer # inspect the RPG world in WDL at localhost:3000
+```
+
+The launcher uses `GODOT_BIN`, Godot on PATH, or an unpacked Godot .NET download on Windows. Set `GODOT_BIN` for another installation. Open the web demo through its server URL, not by double-clicking its HTML file.
 
 Requires Node 22.12+, dependencies installed with `npm ci`, the .NET SDK, and **Godot 4.7.2 .NET** (the SDK version used by this demo).
 
@@ -18,7 +31,7 @@ godot --headless --path examples/godot-dotnet -- --import-wdl
 godot --path examples/godot-dotnet
 ```
 
-Use your Godot .NET executable path if it is not on PATH. Open `examples/godot-dotnet/project.godot` in Godot to work in the editor. The enabled **WDL** dock provides Build Changed, Build All, Watch, and Import. Set its Node executable and WDL repository path if needed. Build the C# project again when the generated capability signatures change.
+Use your Godot .NET executable path if it is not on PATH. Open `examples/godot-dotnet/project.godot` in Godot to work in the editor. The enabled **World Studio** dock provides Build Changed, Build All, Watch, and Import. Set its Node executable and WDL repository path if needed. Build the C# project again when the generated capability signatures change.
 
 **Controls:** WASD walk, mouse look, Shift sprint, E interact, Esc release mouse, F5 save, F9 restore. Click to capture the mouse again. Walk forward through the town gate to the woodland, then through the far gate to the dungeon. The lever on the left opens the vault gate. Houses contain separate interiors and chests.
 
@@ -105,5 +118,3 @@ godot --headless --path examples/godot-dotnet -- --smoke-test
 ```
 
 `game:verify` compares JS and standalone C# results for a shared sequence covering gate state, asynchronous failure/retry, duplicate suppression, instance isolation, and persistence. It also checks unchanged artifact mtimes. With the Three.js server running, `node scripts/verify-three.mjs` walks through town and woodland portals in Chrome. Set `PLAYWRIGHT_CHANNEL` to another installed Playwright browser channel when needed.
-
-Validated locally: TypeScript checking; 21 unit tests (2 optional MCP checks skipped); Next.js production build; all 6 workbench browser cases (the Windows component-search case passed after path normalization); JS/C# parity and build-failure checks; Three.js production build and walking/gate/chest browser smoke; Godot .NET build with zero warnings; native scene import, unchanged timestamps, independent placed components, gameplay, persistence, and rendered preview. Standards and spec reviews have no unresolved findings.

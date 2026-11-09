@@ -1,4 +1,4 @@
-# Authoring WDL
+# Authoring worlds in Generative World Studio
 
 Worlds are ordinary TypeScript/JSX programs compiled into descriptive artifacts. Import the public vocabulary from `src/wdl/index.js`, compose pure components, give referenceable elements explicit keys/IDs, and keep generation deterministic.
 

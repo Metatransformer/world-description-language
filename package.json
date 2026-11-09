@@ -4,6 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "game": "node scripts/run-game.mjs",
+    "game:editor": "node scripts/run-game.mjs --editor",
+    "game:web": "node scripts/run-game.mjs --web",
+    "game:explorer": "node scripts/run-game.mjs --explorer",
+    "game:spawn": "node scripts/run-game.mjs --spawn",
+    "game:spawn:explorer": "node scripts/run-game.mjs --spawn --explorer",
+    "game:spawn:web": "node scripts/run-game.mjs --spawn --web",
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start",
@@ -17,7 +24,12 @@
     "game:watch": "tsx scripts/build-game.ts --watch",
     "game:three": "vite --config examples/three-runtime/vite.config.ts",
     "game:three:build": "vite build --config examples/three-runtime/vite.config.ts",
-    "game:verify": "tsx scripts/verify-game.ts"
+    "game:verify": "tsx scripts/verify-game.ts",
+    "docs:dev": "node scripts/build-agent-docs.mjs && vitepress dev docs --host 127.0.0.1 --port 4173",
+    "docs:build": "node scripts/build-agent-docs.mjs && vitepress build docs",
+    "docs:preview": "vitepress preview docs --host 127.0.0.1 --port 4173",
+    "game:spawn:build": "tsx scripts/build-game.ts --entry worlds/spawn-demo.tsx",
+    "game:spawn:editor": "node scripts/run-game.mjs --spawn --editor"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.2",
@@ -38,10 +50,11 @@
     "@types/three": "^0.187.0",
     "tsx": "^4.20.6",
     "vite": "^7.3.0",
+    "vitepress": "^1.6.4",
     "vitest": "^5.1.0"
   },
   "license": "MIT",
-  "description": "Compose game worlds in TypeScript and JSX. Preview in Three.js, export to Blender, and author with MCP.",
+  "description": "Generative World Studio: compose portable game worlds in JSX and integrate with native engines.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Metatransformer/world-description-language.git"

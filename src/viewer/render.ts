@@ -146,6 +146,8 @@ export function buildSpace(manifest: WorldManifest, spaceId: string) {
       shape.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
     }
     const mesh = new THREE.Mesh(shape, meshMaterial);
+    const behavior = object.properties?.wdl as { bindings?: { visible?: unknown } } | undefined;
+    mesh.visible = behavior?.bindings?.visible !== false;
     mesh.name = object.name ?? object.id;
     mesh.userData.wdlId = object.id;
     mesh.userData.wdlType = object.type;

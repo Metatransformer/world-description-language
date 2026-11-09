@@ -1,7 +1,7 @@
 config_version=5
 
 [application]
-config/name="WDL · Alder Vale"
+config/name="Generative World Studio"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 

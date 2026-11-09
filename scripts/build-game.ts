@@ -15,7 +15,7 @@ const output = resolve(option("--out", "examples/godot-dotnet/generated"));
 const buildId = createHash("sha256").update(entry + output).digest("hex").slice(0, 16);
 const staging = resolve(".wdl", "game-staging-" + buildId);
 const cachePath = resolve(".wdl", "game-build-" + buildId + ".json");
-type Cache = { dependencies: string[]; fingerprint: string; outputs: string[] };
+type Cache = { dependencies: string[]; fingerprint: string; outputs: string[]; revision: string };
 async function fingerprint(dependencies: string[]) {
   const hash = createHash("sha256");
   const paths = new Set([...dependencies, ...(await files("src")), ...(await files("scripts"))]);
@@ -37,7 +37,8 @@ async function build() {
     let cache: Cache | undefined;
     try { cache = JSON.parse(await readFile(cachePath, "utf8")); } catch { /* First build. */ }
     if (!flags.has("--all") && cache && cache.fingerprint === await fingerprint(cache.dependencies)) {
-      let intact = true;
+      let intact = false;
+      try { intact = !!cache.revision && cache.revision === await readFile(join(output, "revision.txt"), "utf8"); } catch { /* Missing output. */ }
       for (const file of [...cache.outputs, "revision.txt"]) try { await readFile(join(output, file)); } catch { intact = false; }
       if (intact) { console.log(JSON.stringify({ status: "ok", changed: 0, cached: true })); return; }
     }
@@ -83,7 +84,7 @@ async function build() {
     for (const old of cache?.outputs ?? []) {
       if (!currentOutputs.includes(old)) await rm(join(output, old), { force: true });
     }
-    await writeFile(cachePath, JSON.stringify({ dependencies, fingerprint: await fingerprint(dependencies), outputs: currentOutputs } satisfies Cache));
+    await writeFile(cachePath, JSON.stringify({ dependencies, fingerprint: await fingerprint(dependencies), outputs: currentOutputs, revision } satisfies Cache));
     console.log(JSON.stringify({ status: "ok", changed, revision, spaces: manifest.spaces.length, objects: manifest.objects.length }));
   } finally { active = false; }
 }

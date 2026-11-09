@@ -1,0 +1,17 @@
+{
+  "textures": {
+    "fieldstone": "cdn/texture-fieldstone-wall-mossy.png",
+    "oak": "cdn/texture-dark-oak-planks-weathered.png",
+    "plaster": "cdn/texture-limewash-plaster.png",
+    "slate": "cdn/texture-slate-roof-tiles-pale-weathered-grey-light.png",
+    "iron": "cdn/texture-wrought-iron.png",
+    "flagstone": "cdn/texture-flagstone-floor-worn.png",
+    "hay": "cdn/texture-hay-bale-straw.png"
+  },
+  "tints": {
+    "stone": "oklch(0.95 0.01 90)",
+    "wood": "oklch(0.93 0.02 70)",
+    "white": "oklch(0.97 0.012 85)",
+    "iron": "oklch(0.92 0.005 250)"
+  }
+}

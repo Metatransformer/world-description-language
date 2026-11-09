@@ -1,0 +1,32 @@
+{
+  "tex": {
+    "FS": "cdn/texture-fieldstone-wall-mossy.png",
+    "OAK": "cdn/texture-dark-oak-planks-weathered.png",
+    "PL": "cdn/texture-limewash-plaster.png",
+    "SL": "cdn/texture-slate-roof-tiles-pale-weathered-grey-light.png",
+    "IR": "cdn/texture-wrought-iron.png",
+    "FLAG": "cdn/texture-flagstone-floor-worn.png",
+    "HAY": "cdn/texture-hay-bale-straw.png",
+    "TAR": "cdn/texture-tarred-black-roof-planks.png",
+    "DRIFT": "cdn/texture-weathered-grey-dock-planks.png",
+    "CANVAS": "cdn/texture-canvas-weathered.png",
+    "NET": "cdn/texture-fishing-net-knotted-rope.png",
+    "ROCK": "cdn/texture-granite-rock-lichen.png"
+  },
+  "tint": {
+    "STONE": "oklch(0.95 0.01 90)",
+    "WOOD": "oklch(0.93 0.02 70)",
+    "WHITE": "oklch(0.97 0.012 85)",
+    "IRONC": "oklch(0.92 0.005 250)",
+    "TARC": "oklch(0.93 0.01 60)",
+    "DRIFTC": "oklch(0.9 0.015 75)"
+  },
+  "mesh": {
+    "sides": 12,
+    "k": 1,
+    "parallel": 0.98
+  },
+  "roomy": {
+    "minHeight": 0.02
+  }
+}

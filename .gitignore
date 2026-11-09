@@ -11,3 +11,8 @@ playwright-report/
 **/obj/
 examples/godot-dotnet/generated/
 *.cs.uid
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/public/markdown/
+docs/public/llms.txt
+docs/public/llms-full.txt

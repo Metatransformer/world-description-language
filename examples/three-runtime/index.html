@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Alder Vale · WDL / Three.js</title>
+<title>Generative World Studio · Browser demo</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#10212b;color:#f0e4c9;font:15px system-ui}canvas{display:block}
 #panel{position:absolute;top:24px;left:24px;padding:20px 24px;background:#10212be8;border:1px solid #71877b;border-radius:10px;max-width:460px}
@@ -8,8 +8,15 @@ h1{font:28px Georgia;margin:5px 0 12px}small{color:#a9bcae;letter-spacing:2px}p{
 button{background:#dbc393;color:#172b30;border:0;border-radius:4px;padding:10px 15px;font:inherit;cursor:pointer}
 #crosshair{position:absolute;left:50%;top:50%;color:white;pointer-events:none}#status{color:#ebcf82}
 </style></head><body>
-<div id="panel"><small>WDL / THREE.JS RUNTIME</small><h1>Alder Vale</h1>
+<div id="panel"><small>GENERATIVE WORLD STUDIO / TOY ENGINE</small><h1>Alder Vale</h1>
 <p id="place"></p><p>WASD walk · Mouse look · E interact<br>Shift sprint · Esc release mouse</p>
 <button id="play">Explore world</button> <button id="save">Save</button> <button id="restore">Restore</button>
+<p id="tour" hidden><label for="destination">Demo tour </label><select id="destination"></select> <button id="visit">Visit</button></p>
 <p id="status">A portable JSX world. A native JavaScript engine.</p></div><div id="crosshair">+</div>
+<script>
+if (location.protocol === "file:") {
+  document.querySelector("#status").textContent = "Start this demo with npm run game:web from the project folder. It opens the local server in your browser; this HTML file cannot run directly.";
+  document.querySelectorAll("button").forEach(button => button.disabled = true);
+}
+</script>
 <script type="module" src="/main.ts"></script></body></html>

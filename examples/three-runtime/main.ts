@@ -28,12 +28,31 @@ let elapsed = performance.now();
 let target: string | undefined;
 const contract: BehaviorArtifact = await (await fetch("/behavior.json")).json();
 const manifest: WorldManifest = await (await fetch("/manifest.json")).json();
+document.querySelector("h1")!.textContent = manifest.name;
+document.title = manifest.name + " · Generative World Studio";
+const saveKey = "wdl-" + manifest.name;
 const index: { spaces: Array<{ id: string; file: string; nodes: string[] }> } = await (await fetch("/index.json")).json();
 const runtime = new WorldRuntime(contract, {
   "world.travel": async args => { await travel(String(args.space), new THREE.Vector3(Number(args.x), Number(args.y) - 1, Number(args.z))); },
   "inventory.grant": args => { coins++; status.textContent = "Collected " + args.item; },
 });
 const loader = new GLTFLoader();
+const tour = manifest.metadata?.tour as Array<{ space: string; label: string; position: [number, number, number] }> | undefined;
+if (tour?.length) {
+  document.querySelector<HTMLElement>("#tour")!.hidden = false;
+  const destinations = document.querySelector<HTMLSelectElement>("#destination")!;
+  for (const stop of tour) destinations.add(new Option(stop.label, stop.space));
+  document.querySelector("#visit")!.addEventListener("click", async () => {
+    if (busy) return;
+    const stop = tour.find(item => item.space === destinations.value)!;
+    busy = true;
+    try {
+      await travel(stop.space, new THREE.Vector3(stop.position[0], stop.position[1] - 1, stop.position[2]));
+      camera.rotation.set(0, 0, 0);
+    } catch (error) { status.textContent = String(error); }
+    finally { busy = false; }
+  });
+}
 function refresh() {
   for (const [id, object] of objects) object.visible = runtime.binding(id, "visible") !== false;
 }
@@ -113,17 +132,18 @@ addEventListener("resize", () => {
   camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight);
 });
 document.querySelector("#save")!.addEventListener("click", () => {
-  try { localStorage.setItem("wdl-alder-vale", JSON.stringify({ world: runtime.snapshot(), coins, space: spaceId, position: player.toArray() })); status.textContent = "Saved world and inventory"; }
+  try { localStorage.setItem(saveKey, JSON.stringify({ world: runtime.snapshot(), coins, space: spaceId, position: player.toArray() })); status.textContent = "Saved world and inventory"; }
   catch (error) { status.textContent = String(error); }
 });
 document.querySelector("#restore")!.addEventListener("click", async () => {
   try {
-    const save = JSON.parse(localStorage.getItem("wdl-alder-vale") ?? "null");
+    const save = JSON.parse(localStorage.getItem(saveKey) ?? "null");
     if (!save) throw new Error("No save yet");
     runtime.restore(save.world); coins = save.coins; await travel(save.space, new THREE.Vector3().fromArray(save.position));
   } catch (error) { status.textContent = String(error); }
 });
-await travel("town", player.clone());
+const start = manifest.metadata?.start as { space: string; position: [number, number, number] } | undefined;
+await travel(start?.space ?? "town", start ? new THREE.Vector3(start.position[0], start.position[1] - 1, start.position[2]) : player.clone());
 renderer.setAnimationLoop(() => {
   const now = performance.now(), dt = Math.min((now - elapsed) / 1000, 0.05); elapsed = now;
   if (document.pointerLockElement && !busy) {

@@ -1,0 +1,25 @@
+{
+  "source": "Valenfeld/Spawn",
+  "files": {
+    "scripts/gen/house.js": "63c6972272f368b838663343f11c34359373f3797105c827c817f7f1eb544b1c",
+    "scripts/lib/data/building-kit.yml": "23bd76d6d442f755f76cf8c129187acf19c89b892fd7034f2085771ea49e60d7",
+    "scripts/lib/buildkit.js": "1adeca8fa85d3b7110fdef7f51cf7b77236d3ca8ed9a369765ee330cae2d59d3",
+    "scripts/lib/data/kit-build.yml": "e9f6e00e8d0a6a5c8f9cbe30df86316c4a12c1285a2547ed45ade4b3132dcc13",
+    "scripts/lib/kits.js": "90d58fd26a8b831cc1869f5d748ef71b2aa51e1aa1d4eeb226a778b64403cb0d",
+    "scripts/lib/data/kits.yml": "619cd151fc3d6b99fa78d4bed775d8e9d326785eb5f6f55f05a5c11885cad7bd",
+    "scripts/lib/pieces/cottage.js": "f4543ca372b9082148bfe0a3ede7616d550bb24fd34cc3bca75aa04ea42118ad",
+    "scripts/gen/well.js": "97a6659ed89452e29507d148f681801d95d2c3a7a33769d781230a0c85eeb5ca",
+    "scripts/gen/market-stall.js": "94235c2418476cafa24961d34fae2e79eb3cc6c6df4525ad0357a0e123d354ce",
+    "scripts/gen/tavern.js": "ee0e3ea2310619f0418fcd2c9b8ac554303d7f7e9df7a6ecf2c7da2797cbbb8e",
+    "scripts/lib/pieces/shutdoor.js": "8c572350c6d8a14527e88d301fe5ecd67996b818666a98812a927f11a51771f2",
+    "scripts/lib/pieces/table.js": "af3d2dbf77ad42ba7f8511aec135b50843aa29753759ccf3e963e6dea02d993c",
+    "scripts/gen/inn-hall.js": "fe3335b838e59d88642d7efb520e306739ceabfff141b4750578ff67fd5e4b5e",
+    "scripts/lib/pieces/candle.js": "f02c5df865834ec97ca7580ddd67f7c7a525bde883dfa59ef9cdf3f3be7e49f1",
+    "scripts/lib/pieces/lantern.js": "2fdd57abada3daca186f2f832ea21798c69df0f9b83fe32a8f011d6c65fd5a58",
+    "scripts/lib/pieces/bench.js": "5ee606665bff9bfa2601cc660f1e22b8a54097facf86a106195ae959d3034d7f",
+    "scripts/gen/chest.js": "787a1e0cb84faa5fea5d6306ee513bd853c5b238ce763cf533ac731426d653c2",
+    "scripts/lib/geo.js": "cb559de55ee144a3d7e763b9e724e050c1664fb46ffbef15ed63f9ca100fe1f2",
+    "content/place-program/settlement/valenfeld.houses.jsx": "e70da73bf3bfd92753cb953a9aaa9abc8071d1dc4db9e3371302569b57bcdc1a",
+    "content/place-program/interior/valenfeld-inn.tree.jsx": "d1717555ed296ec78642c34802feaaa769b905c66e3b2ad3b3320d21d5f6d634"
+  }
+}

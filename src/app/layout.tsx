@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WDL — Valenreach",
-  description: "Local World Description Language workbench",
+  title: "Generative World Studio",
+  description: "Compose and inspect portable JSX game worlds",
 };
 export default function RootLayout({
   children,

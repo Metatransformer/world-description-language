@@ -1,0 +1,99 @@
+{
+  "active": {
+    "architecture": "base",
+    "dungeon": "base",
+    "prop": "base",
+    "tree": "base",
+    "gear": "base",
+    "creature": "base",
+    "person": "base"
+  },
+  "sets": {
+    "base": {
+      "house": {
+        "category": "architecture",
+        "gen": "scripts/gen/house.js",
+        "params": {
+          "w": 7,
+          "d": 6,
+          "two": true,
+          "storey2": [
+            2.8,
+            5.5
+          ],
+          "storey1": [
+            0.7,
+            3.2
+          ],
+          "jetty": 0.25,
+          "chim": 1,
+          "doorX": 0,
+          "shut": "#a8452e",
+          "roofCol": "oklch(0.95 0.01 200)",
+          "doorCol": "oklch(0.88 0.03 55)",
+          "stepCol": "oklch(0.9 0.012 80)",
+          "potCol": "#8a4a32",
+          "boxCol": "#4f6b4a",
+          "flowers": [
+            "#a8452e",
+            "#c9a45a",
+            "#e8e0d0",
+            "#8a4a8a",
+            "#d06a40"
+          ],
+          "glass": "#2a2620",
+          "glow": [
+            0.36,
+            0.22,
+            0.08
+          ]
+        }
+      },
+      "inn-hall": {
+        "category": "architecture",
+        "gen": "scripts/gen/inn-hall.js"
+      },
+      "chest": {
+        "category": "prop",
+        "gen": "scripts/gen/chest.js"
+      },
+      "market-stall": {
+        "category": "prop",
+        "gen": "scripts/gen/market-stall.js",
+        "params": {
+          "goods": "general",
+          "a": "#a8452e",
+          "b": "#c9a45a",
+          "stripes": 8,
+          "counter": "oklch(0.9 0.03 65)",
+          "crate": "oklch(0.95 0.03 75)",
+          "lamp": "#ffd9a0",
+          "lampGlow": [
+            1.8,
+            1,
+            0.4
+          ],
+          "potions": [
+            "#a8452e",
+            "#2f3d52",
+            "#4f6b4a",
+            "#c9a45a",
+            "#7a3a6a",
+            "#a8452e",
+            "#4f6b4a"
+          ]
+        }
+      },
+      "well": {
+        "category": "prop",
+        "gen": "scripts/gen/well.js",
+        "params": {
+          "rim": "oklch(0.9 0.012 80)",
+          "water": "#16201f",
+          "rope": "#8a7350",
+          "roof": "oklch(0.95 0.01 200)"
+        }
+      }
+    }
+  }
+}

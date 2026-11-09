@@ -1,6 +1,6 @@
-# Contributing to WDL
+# Contributing to Generative World Studio
 
-WDL explores a simple idea: a game world should be a composable program. Contributions should improve the authoring language, portable artifact contract, spatial generation, or the ability to inspect the generated world.
+Generative World Studio explores a simple idea: a game world should be a composable program. Contributions should improve the authoring language, portable artifact contract, spatial generation, or the ability to inspect the generated world. Agents should start with [AGENTS.md](AGENTS.md).
 
 ## Local setup
 
@@ -31,6 +31,8 @@ For MCP changes, leave the workbench running and run `npm run test:mcp`. For a f
 For exporter changes, run `npm run compile`, import the generated glTF scenes into Blender, and inspect materials, transforms, and separate spaces. The automated Blender check is described in the README.
 
 ## Pull requests
+
+Documentation lives in `docs/` as Markdown. Run `npm run docs:dev` to preview the VitePress site and `npm run docs:build` to check links and generate the agent-readable exports. For a new task workflow, add a conditional pointer from `docs/AGENT-QUICKSTART.md`; keep the root agent instructions short. Generated docs outputs remain ignored by Git. Set `DOCS_BASE` when building for a host subpath.
 
 Explain the visible change, why it matters, how to try it, and which checks passed. Include a screenshot for spatial or viewer changes. Call out changes to the artifact contract explicitly. Do not commit `node_modules`, `.next`, `.wdl`, test recordings, credentials, or locally generated export files.
 

@@ -9,8 +9,8 @@ import {
 } from "../wdl/index";
 
 const ROOT = resolve(process.cwd());
-const ENTRY = resolve(ROOT, "worlds/valenreach.tsx");
-const SOURCE_ROOTS = [resolve(ROOT, "worlds"), resolve(ROOT, "src/wdl"), resolve(ROOT, "src/dungeon")];
+const ENTRY = resolve(ROOT, process.env.WDL_ENTRY ?? "worlds/valenreach.tsx");
+const SOURCE_ROOTS = [resolve(ROOT, "worlds"), resolve(ROOT, "src/wdl"), resolve(ROOT, "src/dungeon"), resolve(ROOT, "src/runtime")];
 
 export type ViewerCamera = {
   position: [number, number, number];
